@@ -29,12 +29,12 @@ const scrollToTop = () => {
       <Outlet />
       <Footer />
 
-      <a href="tel:+447742600144" className="phone-float" aria-label="Call Us">
+      <a href="tel:+442076800696" className="phone-float" aria-label="Call Us">
         <TelephoneFill />
       </a>
 
       <a
-        href="https://wa.me/447742600144"
+        href="https://wa.me/442076800696"
         target="_blank"
         rel="noopener noreferrer"
         className="whatsapp-float"
