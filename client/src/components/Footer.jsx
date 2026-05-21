@@ -8,6 +8,8 @@ const Footer = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
+  const LOGO = "/Images/Logo.png";
+
   const handleSubscribe = (e) => {
     e.preventDefault();
 
@@ -74,32 +76,12 @@ const Footer = () => {
           margin-bottom: 24px;
         }
 
-        .hb-brand-icon {
-          width: 64px;
-          height: 64px;
-          border-radius: 20px;
-          display: grid;
-          place-items: center;
-          font-size: 28px;
-          color: white;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark), var(--hb-yellow));
-          box-shadow: 0 22px 55px rgba(229,9,20,.32);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .hb-brand-icon::after {
-          content: "";
-          position: absolute;
-          inset: -40%;
-          background: linear-gradient(120deg, transparent, rgba(255,255,255,.65), transparent);
-          transform: translateX(-120%) rotate(20deg);
-          animation: shine 4s infinite;
-        }
-
-        .hb-brand-icon i {
-          position: relative;
-          z-index: 2;
+        .hb-brand-logo {
+          width: 82px;
+          height: 82px;
+          object-fit: contain;
+          display: block;
+          filter: drop-shadow(0 18px 35px rgba(229,9,20,.28));
         }
 
         .hb-brand-text {
@@ -226,12 +208,6 @@ const Footer = () => {
           transition: .3s ease;
         }
 
-        .hb-contact-box:hover {
-          transform: translateY(-5px);
-          border-color: rgba(229,9,20,.3);
-          box-shadow: 0 18px 40px rgba(229,9,20,.12);
-        }
-
         .hb-contact-icon {
           min-width: 46px;
           height: 46px;
@@ -257,10 +233,6 @@ const Footer = () => {
           line-height: 1.7;
           text-decoration: none;
           font-weight: 600;
-        }
-
-        .hb-contact-box a:hover {
-          color: var(--hb-red);
         }
 
         .hb-newsletter {
@@ -298,12 +270,6 @@ const Footer = () => {
           margin-bottom: 14px;
         }
 
-        .hb-newsletter-input:focus {
-          background: white;
-          border-color: var(--hb-red);
-          box-shadow: 0 0 0 5px rgba(229,9,20,.1);
-        }
-
         .hb-newsletter-btn {
           width: 100%;
           height: 52px;
@@ -313,11 +279,6 @@ const Footer = () => {
           background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
           color: white;
           transition: .3s ease;
-        }
-
-        .hb-newsletter-btn:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 20px 45px rgba(229,9,20,.26);
         }
 
         .hb-bottom {
@@ -360,11 +321,6 @@ const Footer = () => {
           font-size: 18px;
         }
 
-        @keyframes shine {
-          0% { transform: translateX(-120%) rotate(20deg); }
-          45%,100% { transform: translateX(120%) rotate(20deg); }
-        }
-
         @media (max-width: 1100px) {
           .hb-top {
             grid-template-columns: repeat(2,1fr);
@@ -379,6 +335,11 @@ const Footer = () => {
           .hb-top {
             grid-template-columns: 1fr;
             gap: 45px;
+          }
+
+          .hb-brand-logo {
+            width: 72px;
+            height: 72px;
           }
 
           .hb-brand-text {
@@ -401,9 +362,7 @@ const Footer = () => {
           <div className="hb-top">
             <div>
               <div className="hb-brand">
-                <div className="hb-brand-icon">
-                  <i className="bi bi-fire"></i>
-                </div>
+                <img src={LOGO} alt="Fast Food Logo" className="hb-brand-logo" />
 
                 <div className="hb-brand-text">
                   FAST<span> FOOD</span>
@@ -419,18 +378,10 @@ const Footer = () => {
               </p>
 
               <div className="hb-socials">
-                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
-                  <i className="bi bi-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
-                  <i className="bi bi-facebook"></i>
-                </a>
-                <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer">
-                  <i className="bi bi-tiktok"></i>
-                </a>
-                <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">
-                  <i className="bi bi-youtube"></i>
-                </a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i className="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noreferrer"><i className="bi bi-facebook"></i></a>
+                <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer"><i className="bi bi-tiktok"></i></a>
+                <a href="https://www.youtube.com/" target="_blank" rel="noreferrer"><i className="bi bi-youtube"></i></a>
               </div>
             </div>
 
@@ -442,7 +393,6 @@ const Footer = () => {
                     <NavLink to={link.path}>{link.name}</NavLink>
                   </li>
                 ))}
-
                 <li>
                   <button onClick={() => navigate("/menu")}>Order Online</button>
                 </li>
@@ -497,9 +447,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <h6>Email</h6>
-                  <a href="mailto:info@kcfastfood.co.uk">
-                    info@fastfood.co.uk
-                  </a>
+                  <a href="mailto:info@fastfood.co.uk">info@fastfood.co.uk</a>
                 </div>
               </div>
 
@@ -533,7 +481,7 @@ const Footer = () => {
           </div>
 
           <div className="hb-bottom">
-            <p>© 2026 <strong>FAST FOOD </strong>. All Rights Reserved.</p>
+            <p>© 2026 <strong>FAST FOOD</strong>. All Rights Reserved.</p>
 
             <div className="hb-payments">
               <span><i className="bi bi-credit-card-fill"></i></span>
