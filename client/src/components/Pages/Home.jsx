@@ -56,8 +56,20 @@ const Home = () => {
 
   const scrollToCart = () => {
     setTimeout(() => {
-      cartRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 120);
+      if (!cartRef.current) return;
+
+      const cartTop =
+        cartRef.current.getBoundingClientRect().top + window.pageYOffset;
+
+      const desktopOffset = 230;
+      const mobileOffset = 155;
+      const offset = window.innerWidth <= 768 ? mobileOffset : desktopOffset;
+
+      window.scrollTo({
+        top: Math.max(cartTop - offset, 0),
+        behavior: "smooth",
+      });
+    }, 180);
   };
 
   const addToCart = (item) => {
@@ -104,6 +116,14 @@ const Home = () => {
 
   const clearCart = () => setCart([]);
 
+  const subtotal = useMemo(() => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  }, [cart]);
+
+  const deliveryFee = cart.length > 0 ? 2.99 : 0;
+  const total = subtotal + deliveryFee;
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
   const handleCheckout = () => {
     if (cart.length === 0) {
       scrollToCart();
@@ -112,7 +132,6 @@ const Home = () => {
 
     setConfirmedTotal(total);
     setShowSuccessPopup(true);
-    setCart([]);
   };
 
   const handleBookOrder = () => {
@@ -126,19 +145,16 @@ const Home = () => {
 
   const closeSuccessPopup = () => {
     setShowSuccessPopup(false);
+    setCart([]);
   };
-
-  const subtotal = useMemo(() => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  }, [cart]);
-
-  const deliveryFee = cart.length > 0 ? 2.99 : 0;
-  const total = subtotal + deliveryFee;
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
       <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+
         :root {
           --hb-black: #120707;
           --hb-red: #e50914;
@@ -541,14 +557,16 @@ const Home = () => {
 
         .hb-cart-panel {
           margin-top: 20px;
+          min-height: 536px;
           border-radius: 36px;
           padding: 30px;
           background:
             linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,227,211,.88));
           border: 1px solid rgba(229,9,20,.18);
           box-shadow: 0 35px 95px rgba(18,7,7,.14);
-          scroll-margin-top: 100px;
           color: var(--hb-black);
+          scroll-margin-top: 220px;
+          transition: min-height .25s ease;
         }
 
         .hb-cart-head {
@@ -898,6 +916,11 @@ const Home = () => {
             padding: 28px 20px;
           }
 
+          .hb-cart-panel {
+            min-height: 520px;
+            scroll-margin-top: 165px;
+          }
+
           .hb-food-img {
             height: 220px;
           }
@@ -1161,12 +1184,12 @@ const Home = () => {
               </p>
 
               <div className="hb-apps">
-                <Button className="hb-app-btn" onClick={() => alert("App Store link coming soon.")}>
+                <Button className="hb-app-btn">
                   <i className="bi bi-apple"></i>
                   App Store
                 </Button>
 
-                <Button className="hb-app-btn" onClick={() => alert("Google Play link coming soon.")}>
+                <Button className="hb-app-btn">
                   <i className="bi bi-google-play"></i>
                   Google Play
                 </Button>
