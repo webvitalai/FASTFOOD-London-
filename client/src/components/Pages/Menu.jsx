@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import { Container, Row, Col, Button, Badge } from "react-bootstrap";
+import { Container, Row, Col, Button, Badge, Modal } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -7,6 +7,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 const Menu = () => {
   const [active, setActive] = useState("All");
   const [cart, setCart] = useState([]);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [confirmedTotal, setConfirmedTotal] = useState(0);
   const cartRef = useRef(null);
 
   const categories = ["All", "Burgers", "Pizzas", "Wings", "Fries", "Drinks"];
@@ -154,11 +156,13 @@ const Menu = () => {
 
   const handleCheckout = () => {
     if (cart.length === 0) {
-      alert("Please add at least one item before checkout.");
+      scrollToCart();
       return;
     }
 
-    alert(`Order booked successfully! Total: £${total.toFixed(2)}`);
+    setConfirmedTotal(total);
+    setShowSuccessPopup(true);
+    setCart([]);
   };
 
   return (
@@ -579,9 +583,84 @@ const Menu = () => {
           font-size: 18px;
         }
 
+        .hb-success-modal .modal-content {
+          border: none;
+          border-radius: 34px;
+          overflow: hidden;
+          background: transparent;
+          box-shadow: 0 34px 90px rgba(18,7,7,.28);
+        }
+
+        .hb-success-box {
+          padding: 42px 32px;
+          text-align: center;
+          background:
+            radial-gradient(circle at top right, rgba(255,191,0,.24), transparent 34%),
+            linear-gradient(135deg, #fff8f1, #ffe3d3);
+          border: 1px solid rgba(229,9,20,.18);
+          color: var(--hb-black);
+        }
+
+        .hb-success-icon {
+          width: 92px;
+          height: 92px;
+          margin: 0 auto 22px;
+          border-radius: 50%;
+          display: grid;
+          place-items: center;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
+          color: white;
+          font-size: 44px;
+          box-shadow: 0 20px 52px rgba(229,9,20,.34);
+          animation: successPop .45s ease;
+        }
+
+        .hb-success-box h3 {
+          font-size: 34px;
+          font-weight: 950;
+          margin-bottom: 12px;
+        }
+
+        .hb-success-box p {
+          color: var(--hb-muted);
+          font-weight: 650;
+          line-height: 1.75;
+          margin-bottom: 20px;
+        }
+
+        .hb-success-total {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 13px 20px;
+          border-radius: 999px;
+          background: white;
+          border: 1px solid rgba(229,9,20,.16);
+          color: var(--hb-red);
+          font-size: 20px;
+          font-weight: 950;
+          margin-bottom: 24px;
+          box-shadow: 0 12px 32px rgba(18,7,7,.08);
+        }
+
+        .hb-success-close {
+          width: 100%;
+          border: none !important;
+          border-radius: 999px !important;
+          padding: 14px 24px !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          color: white !important;
+          font-weight: 950 !important;
+        }
+
         @keyframes floatFire {
           0%,100% { transform: translateY(0) rotate(-8deg); }
           50% { transform: translateY(-20px) rotate(8deg); }
+        }
+
+        @keyframes successPop {
+          0% { transform: scale(.7); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
         @media(max-width: 991px) {
@@ -793,6 +872,38 @@ const Menu = () => {
           </div>
         </Container>
       </main>
+
+      <Modal
+        show={showSuccessPopup}
+        onHide={() => setShowSuccessPopup(false)}
+        centered
+        className="hb-success-modal"
+      >
+        <div className="hb-success-box">
+          <div className="hb-success-icon">
+            <i className="bi bi-check2-circle"></i>
+          </div>
+
+          <h3>Order Booked Successfully!</h3>
+
+          <p>
+            Thank you for your order. Your meal request has been received and
+            our team will prepare it fresh for you.
+          </p>
+
+          <div className="hb-success-total">
+            <i className="bi bi-receipt"></i>
+            Total: £{confirmedTotal.toFixed(2)}
+          </div>
+
+          <Button
+            className="hb-success-close"
+            onClick={() => setShowSuccessPopup(false)}
+          >
+            Continue Ordering
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 };
