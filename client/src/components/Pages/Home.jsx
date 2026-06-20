@@ -1004,7 +1004,7 @@ icon: "bi bi-basket-fill",
 
               <h1 className="ff-title">
                 Crazy Flavours
-                <span>One Place.</span>
+                <span>One Place</span>
               </h1>
 
               <p className="ff-text">
