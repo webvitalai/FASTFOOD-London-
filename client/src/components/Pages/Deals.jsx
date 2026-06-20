@@ -966,9 +966,6 @@ const Deals = () => {
             <span className="hb-quick-pill">
               <i className="bi bi-cloud-steam-fill"></i> Fresh Meals
             </span>
-            <span className="hb-quick-pill">
-              <i className="bi bi-bag-check-fill"></i> Easy Booking
-            </span>
           </div>
 
           <Row className="g-4">
