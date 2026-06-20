@@ -14,6 +14,10 @@ const FindUs = () => {
     message: "",
   });
 
+  const phoneNumber = "+442076800696";
+  const whatsappNumber = "442076800696";
+  const mapQuery = "51.51167430677527,-0.08720812507322412";
+
   const handleChange = (e) => {
     setForm((prev) => ({
       ...prev,
@@ -44,59 +48,94 @@ const FindUs = () => {
           --hb-black: #120707;
           --hb-red: #e50914;
           --hb-red-dark: #8f0008;
+          --hb-orange: #ff5a00;
           --hb-yellow: #ffbf00;
-          --hb-cream: #fff7ed;
-          --hb-soft: #ffe3d3;
-          --hb-muted: #6f4e45;
+          --hb-cream: #fff8ed;
+          --hb-soft: #ffe3c2;
+          --hb-muted: #765040;
         }
 
         .hb-contact-page {
           min-height: 100vh;
-          padding: 130px 0 90px;
+          padding: 120px 0 80px;
           color: var(--hb-black);
           background:
-            radial-gradient(circle at top left, rgba(229,9,20,.2), transparent 32%),
-            radial-gradient(circle at bottom right, rgba(255,191,0,.18), transparent 30%),
-            linear-gradient(160deg, #fff7ed, #ffe3d3 48%, #fff7ed);
+            radial-gradient(circle at 10% 10%, rgba(255,191,0,.35), transparent 24%),
+            radial-gradient(circle at 90% 8%, rgba(229,9,20,.22), transparent 28%),
+            radial-gradient(circle at 50% 100%, rgba(255,90,0,.22), transparent 34%),
+            linear-gradient(145deg, #fff8ed 0%, #ffe3c2 48%, #fff1dc 100%);
           overflow: hidden;
           position: relative;
           font-family: "Inter", sans-serif;
         }
 
+        .hb-contact-page::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,.34) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.34) 1px, transparent 1px);
+          background-size: 42px 42px;
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 82%);
+          pointer-events: none;
+        }
+
         .hb-contact-glow {
           position: absolute;
           right: -70px;
-          top: 130px;
+          top: 120px;
           font-size: 230px;
           color: rgba(229,9,20,.11);
           animation: floatIcon 5s ease-in-out infinite;
           pointer-events: none;
         }
 
+        .hb-steam-glow {
+          position: absolute;
+          left: -40px;
+          bottom: 210px;
+          font-size: 180px;
+          color: rgba(255,90,0,.1);
+          animation: floatIcon 6s ease-in-out infinite reverse;
+          pointer-events: none;
+        }
+
         .hb-contact-heading {
           text-align: center;
-          margin-bottom: 65px;
+          margin-bottom: 42px;
+          position: relative;
+          z-index: 2;
         }
 
         .hb-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
           color: var(--hb-red);
+          background: rgba(255,255,255,.75);
+          border: 1px solid rgba(229,9,20,.16);
+          box-shadow: 0 16px 40px rgba(18,7,7,.08);
+          border-radius: 999px;
+          padding: 11px 18px;
           font-size: 12px;
           font-weight: 950;
-          letter-spacing: 4px;
+          letter-spacing: 2px;
           text-transform: uppercase;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
+          backdrop-filter: blur(14px);
         }
 
         .hb-contact-heading h2 {
-          font-size: clamp(46px, 7vw, 88px);
+          font-size: clamp(44px, 7vw, 88px);
           font-weight: 950;
           line-height: .9;
           margin-bottom: 18px;
-          letter-spacing: -2px;
+          letter-spacing: -3px;
         }
 
         .hb-contact-heading h2 span {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark), var(--hb-yellow));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange), var(--hb-yellow));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -104,50 +143,76 @@ const FindUs = () => {
         .hb-contact-heading p {
           color: var(--hb-muted);
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 650;
+          max-width: 720px;
+          margin: auto;
+          line-height: 1.75;
         }
 
-        .hb-line {
-          width: 100px;
-          height: 5px;
+        .hb-quick-strip {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin: 0 0 42px;
+        }
+
+        .hb-quick-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 15px;
           border-radius: 999px;
-          margin: 20px auto 0;
-          background: linear-gradient(90deg, var(--hb-red), var(--hb-yellow));
+          background: rgba(255,255,255,.84);
+          color: var(--hb-black);
+          border: 1px solid rgba(229,9,20,.14);
+          box-shadow: 0 12px 30px rgba(18,7,7,.06);
+          font-weight: 900;
+          font-size: 13px;
+        }
+
+        .hb-quick-pill i {
+          color: var(--hb-red);
         }
 
         .hb-contact-card,
         .hb-form-card {
           height: 100%;
-          padding: 34px;
-          border-radius: 32px;
-          background: rgba(255,255,255,.86);
-          border: 1px solid rgba(229,9,20,.18);
+          padding: 32px;
+          border-radius: 34px;
+          background: rgba(255,255,255,.88);
+          border: 1px solid rgba(229,9,20,.16);
           box-shadow: 0 28px 75px rgba(18,7,7,.12);
           backdrop-filter: blur(16px);
+          position: relative;
+          z-index: 2;
         }
 
         .hb-contact-card {
           background:
-            linear-gradient(135deg, rgba(229,9,20,.1), rgba(255,191,0,.12)),
-            rgba(255,255,255,.86);
+            radial-gradient(circle at top right, rgba(255,191,0,.22), transparent 34%),
+            linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,235,210,.92));
         }
 
         .hb-contact-card h3,
         .hb-form-card h3 {
-          font-size: 34px;
+          font-size: 32px;
           font-weight: 950;
           margin-bottom: 24px;
+          letter-spacing: -1px;
         }
 
         .hb-info-box {
           display: flex;
           align-items: flex-start;
           gap: 15px;
-          margin-bottom: 22px;
+          margin-bottom: 18px;
           padding: 16px;
-          border-radius: 20px;
+          border-radius: 22px;
           background: #fff8f1;
-          border: 1px solid rgba(229,9,20,.14);
+          border: 1px solid rgba(229,9,20,.12);
           transition: .3s ease;
         }
 
@@ -158,14 +223,15 @@ const FindUs = () => {
         }
 
         .hb-info-icon {
-          min-width: 48px;
-          height: 48px;
-          border-radius: 15px;
+          min-width: 50px;
+          height: 50px;
+          border-radius: 16px;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange));
           color: white;
           font-size: 19px;
+          box-shadow: 0 12px 28px rgba(229,9,20,.22);
         }
 
         .hb-info-box h6 {
@@ -180,11 +246,84 @@ const FindUs = () => {
           text-decoration: none;
           font-size: 14px;
           line-height: 1.7;
-          font-weight: 600;
+          font-weight: 650;
         }
 
         .hb-info-box a:hover {
           color: var(--hb-red);
+        }
+
+        .hb-actions {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          margin-top: 24px;
+        }
+
+        .hb-action-btn {
+          border: none !important;
+          border-radius: 999px !important;
+          padding: 14px 18px !important;
+          font-weight: 950 !important;
+          color: white !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
+          transition: .3s ease;
+          box-shadow: 0 14px 34px rgba(229,9,20,.2);
+        }
+
+        .hb-action-btn.secondary {
+          background: white !important;
+          color: var(--hb-black) !important;
+          border: 1px solid rgba(229,9,20,.2) !important;
+          box-shadow: none;
+        }
+
+        .hb-action-btn.whatsapp {
+          background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+        }
+
+        .hb-action-btn:hover {
+          transform: translateY(-4px);
+        }
+
+        .hb-food-note {
+          margin-top: 24px;
+          padding: 18px;
+          border-radius: 24px;
+          background: rgba(18,7,7,.88);
+          color: white;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .hb-food-note::after {
+          content: "";
+          position: absolute;
+          width: 120px;
+          height: 120px;
+          right: -45px;
+          top: -45px;
+          border-radius: 50%;
+          background: rgba(255,191,0,.22);
+        }
+
+        .hb-food-note strong {
+          display: block;
+          margin-bottom: 8px;
+          font-size: 18px;
+          font-weight: 950;
+          position: relative;
+          z-index: 2;
+        }
+
+        .hb-food-note p {
+          margin: 0;
+          color: rgba(255,255,255,.76);
+          font-size: 14px;
+          line-height: 1.7;
+          font-weight: 600;
+          position: relative;
+          z-index: 2;
         }
 
         .hb-form-row {
@@ -202,7 +341,7 @@ const FindUs = () => {
           font-size: 12px;
           font-weight: 950;
           text-transform: uppercase;
-          letter-spacing: .12em;
+          letter-spacing: .11em;
           color: var(--hb-black);
           margin-bottom: 9px;
         }
@@ -210,7 +349,7 @@ const FindUs = () => {
         .hb-form-group input,
         .hb-form-group textarea {
           width: 100%;
-          border: 1px solid rgba(229,9,20,.18);
+          border: 1px solid rgba(229,9,20,.16);
           background: #fff8f1;
           border-radius: 18px;
           padding: 16px 18px;
@@ -218,6 +357,7 @@ const FindUs = () => {
           transition: .3s ease;
           font-size: 15px;
           color: var(--hb-black);
+          font-weight: 600;
         }
 
         .hb-form-group textarea {
@@ -237,11 +377,11 @@ const FindUs = () => {
           border: none !important;
           border-radius: 999px !important;
           padding: 16px 24px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-weight: 950 !important;
-          transition: .35s ease;
-          box-shadow: 0 18px 45px rgba(229,9,20,.25);
+          transition: .32s ease;
+          box-shadow: 0 18px 45px rgba(229,9,20,.24);
         }
 
         .hb-send-btn:hover {
@@ -259,13 +399,14 @@ const FindUs = () => {
         }
 
         .hb-map-section {
-          margin-top: 75px;
+          margin-top: 72px;
           border-radius: 38px;
           overflow: hidden;
-          border: 1px solid rgba(229,9,20,.18);
+          border: 1px solid rgba(229,9,20,.16);
           box-shadow: 0 40px 110px rgba(18,7,7,.2);
           position: relative;
           background: white;
+          z-index: 2;
         }
 
         .hb-map-section iframe {
@@ -280,12 +421,12 @@ const FindUs = () => {
           top: 24px;
           left: 24px;
           z-index: 2;
-          width: min(360px, calc(100% - 48px));
+          width: min(380px, calc(100% - 48px));
           padding: 22px;
-          border-radius: 24px;
-          background: rgba(255,248,241,.92);
+          border-radius: 26px;
+          background: rgba(255,248,241,.93);
           backdrop-filter: blur(16px);
-          border: 1px solid rgba(229,9,20,.2);
+          border: 1px solid rgba(229,9,20,.18);
           box-shadow: 0 22px 60px rgba(18,7,7,.18);
         }
 
@@ -293,6 +434,7 @@ const FindUs = () => {
           color: var(--hb-red);
           font-weight: 950;
           margin-bottom: 8px;
+          font-size: 25px;
         }
 
         .hb-map-card p {
@@ -300,7 +442,7 @@ const FindUs = () => {
           margin-bottom: 16px;
           line-height: 1.7;
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 650;
         }
 
         .hb-map-meta {
@@ -316,35 +458,6 @@ const FindUs = () => {
           color: var(--hb-red);
         }
 
-        .hb-actions {
-          display: flex;
-          gap: 14px;
-          flex-wrap: wrap;
-          margin-top: 28px;
-        }
-
-        .hb-action-btn {
-          flex: 1;
-          min-width: 160px;
-          border: none !important;
-          border-radius: 999px !important;
-          padding: 14px 18px !important;
-          font-weight: 950 !important;
-          color: white !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
-          transition: .35s ease;
-        }
-
-        .hb-action-btn.secondary {
-          background: white !important;
-          color: var(--hb-black) !important;
-          border: 1px solid rgba(229,9,20,.22) !important;
-        }
-
-        .hb-action-btn:hover {
-          transform: translateY(-4px);
-        }
-
         @keyframes floatIcon {
           0%, 100% { transform: translateY(0) rotate(-8deg); }
           50% { transform: translateY(-20px) rotate(8deg); }
@@ -355,20 +468,67 @@ const FindUs = () => {
             grid-template-columns: 1fr;
             gap: 0;
           }
+
+          .hb-actions {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (max-width: 768px) {
           .hb-contact-page {
-            padding: 110px 0 70px;
+            padding: 92px 0 58px;
+          }
+
+          .hb-contact-heading {
+            margin-bottom: 32px;
+          }
+
+          .hb-contact-heading h2 {
+            line-height: 1;
+            letter-spacing: -2px;
+          }
+
+          .hb-contact-heading p {
+            font-size: 15px;
+            line-height: 1.7;
+            padding: 0 6px;
+          }
+
+          .hb-quick-strip {
+            justify-content: flex-start;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 8px;
+            margin-bottom: 28px;
+          }
+
+          .hb-quick-pill {
+            flex: 0 0 auto;
           }
 
           .hb-contact-card,
           .hb-form-card {
-            padding: 26px;
+            padding: 22px;
+            border-radius: 28px;
+          }
+
+          .hb-contact-card h3,
+          .hb-form-card h3 {
+            font-size: 26px;
+          }
+
+          .hb-info-box {
+            border-radius: 20px;
+            padding: 14px;
+          }
+
+          .hb-map-section {
+            margin-top: 48px;
+            border-radius: 28px;
           }
 
           .hb-map-section iframe {
-            height: 420px;
+            height: 390px;
           }
 
           .hb-map-card {
@@ -379,26 +539,74 @@ const FindUs = () => {
             border-radius: 0;
           }
 
+          .hb-contact-glow {
+            font-size: 135px;
+            right: -42px;
+            top: 70px;
+          }
+
+          .hb-steam-glow {
+            display: none;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .hb-eyebrow {
+            font-size: 10px;
+            letter-spacing: 1.3px;
+            padding: 10px 14px;
+          }
+
           .hb-contact-heading h2 {
-            line-height: 1;
+            font-size: 42px;
+          }
+
+          .hb-info-box {
+            gap: 12px;
+          }
+
+          .hb-info-icon {
+            min-width: 44px;
+            height: 44px;
+            border-radius: 14px;
           }
         }
       `}</style>
 
       <main className="hb-contact-page">
         <i className="bi bi-chat-dots-fill hb-contact-glow"></i>
+        <i className="bi bi-cloud-steam-fill hb-steam-glow"></i>
 
         <Container>
           <div className="hb-contact-heading">
-            <div className="hb-eyebrow">Contact Us · We Are Here</div>
+            <div className="hb-eyebrow">
+              <i className="bi bi-stars"></i>
+              Contact • Order • Visit
+            </div>
 
             <h2>
-              Talk To <span>FAST FOOD</span>
+              Find <span>Our Kitchen</span>
             </h2>
 
-            <p>Have a question, booking request, complaint or catering enquiry?</p>
+            <p>
+              Questions, table booking, catering enquiry or order support —
+              contact us and enjoy fast food, Chinese and desi favourites.
+            </p>
+          </div>
 
-            <div className="hb-line"></div>
+          <div className="hb-quick-strip">
+            <span className="hb-quick-pill">
+              <i className="bi bi-lightning-charge-fill"></i> Fast Food
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-fire"></i> Chinese
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-cloud-steam-fill"></i> Desi Food
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-truck"></i> Delivery Ready
+            </span>
           </div>
 
           <Row className="g-4">
@@ -414,7 +622,7 @@ const FindUs = () => {
                   <div>
                     <h6>Location</h6>
                     <p>
-                      129 Lemon st, London E1 8EY
+                      129 Lemon St, London E1 8EY
                       <br />
                       United Kingdom
                     </p>
@@ -428,7 +636,24 @@ const FindUs = () => {
 
                   <div>
                     <h6>Phone</h6>
-                    <a href="tel:+442076800696">+44 20 7680 0696</a>
+                    <a href={`tel:${phoneNumber}`}>+44 20 7680 0696</a>
+                  </div>
+                </div>
+
+                <div className="hb-info-box">
+                  <div className="hb-info-icon">
+                    <i className="bi bi-whatsapp"></i>
+                  </div>
+
+                  <div>
+                    <h6>WhatsApp Order</h6>
+                    <a
+                      href={`https://wa.me/${whatsappNumber}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Message us on WhatsApp
+                    </a>
                   </div>
                 </div>
 
@@ -459,23 +684,42 @@ const FindUs = () => {
                 <div className="hb-actions">
                   <Button
                     className="hb-action-btn"
-                    onClick={() => (window.location.href = "tel:+442076800696")}
+                    onClick={() => (window.location.href = `tel:${phoneNumber}`)}
                   >
                     <i className="bi bi-telephone-fill me-2"></i>
                     Call Now
                   </Button>
+
+                  <Button
+                    className="hb-action-btn whatsapp"
+                    onClick={() =>
+                      window.open(`https://wa.me/${whatsappNumber}`, "_blank")
+                    }
+                  >
+                    <i className="bi bi-whatsapp me-2"></i>
+                    WhatsApp
+                  </Button>
+
                   <Button
                     className="hb-action-btn secondary"
                     onClick={() =>
                       window.open(
-                        "https://www.google.com/maps/search/?api=1&query=51.51167430677527,-0.08720812507322412",
+                        `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
                         "_blank"
                       )
                     }
                   >
                     <i className="bi bi-geo-alt-fill me-2"></i>
-                    Get Directions
+                    Directions
                   </Button>
+                </div>
+
+                <div className="hb-food-note">
+                  <strong>Fresh, Hot & Full of Flavour</strong>
+                  <p>
+                    Visit us for burgers, wraps, Chinese noodles, fried rice,
+                    biryani, karahi and fresh combo deals.
+                  </p>
                 </div>
               </div>
             </Col>
@@ -564,16 +808,16 @@ const FindUs = () => {
 
           <div className="hb-map-section">
             <div className="hb-map-card">
-              <h4>Fast Food & Milkshakes</h4>
+              <h4>Fast Food Kitchen</h4>
 
               <p>
-                Visit us for fresh burgers, loaded fries, milkshakes and hot
-                meals served daily.
+                Visit us for fast food, Chinese meals, desi favourites, loaded
+                fries, milkshakes and fresh daily deals.
               </p>
 
               <div className="hb-map-meta">
                 <i className="bi bi-geo-alt-fill"></i>
-                Interactive Google Map
+                129 Lemon St, London E1 8EY
               </div>
             </div>
 
@@ -585,6 +829,7 @@ const FindUs = () => {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              title="Fast Food Location Map"
             ></iframe>
           </div>
         </Container>

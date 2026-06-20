@@ -14,43 +14,67 @@ const Home = () => {
 
   const categories = [
     {
-      title: "Smash Burgers",
+      title: "Chinese Noodles",
+      icon: "bi bi-cup-hot-fill",
+      img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=1400&q=95",
+      desc: "Saucy, spicy and wok-tossed fresh.",
+    },
+    {
+      title: "Steamy Momos",
+icon: "bi bi-basket-fill",
+      img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1400&q=100",
+      desc: "Soft dumplings with fiery dips.",
+    },
+    {
+      title: "Desi Karahi",
       icon: "bi bi-fire",
-      img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&q=90",
-    },
-    {
-      title: "Loaded Fries",
-      icon: "bi bi-stars",
-      img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=1200&q=90",
-    },
-    {
-      title: "Hot Wings",
-      icon: "bi bi-lightning-charge-fill",
-      img: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=1200&q=90",
+      img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=1400&q=95",
+      desc: "Chicken karahi, masala and tandoori heat.",
     },
   ];
 
   const featured = [
     {
       id: 1,
-      name: "Inferno Burger",
+      name: "Dragon Fire Noodles",
       price: 8.99,
-      tag: "Best Seller",
-      img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=1200&q=90",
+      tag: "Chinese",
+      img: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=1200&q=95",
     },
     {
       id: 2,
-      name: "Crispy Chicken",
-      price: 7.49,
-      tag: "Hot",
-      img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=1200&q=90",
+      name: "Chicken Karahi Bowl",
+      price: 10.99,
+      tag: "Desi Special",
+      img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=1200&q=95",
     },
     {
       id: 3,
-      name: "Mega Stack",
-      price: 11.99,
-      tag: "Premium",
-      img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=1200&q=90",
+      name: "Spicy Momos Platter",
+      price: 7.49,
+      tag: "Hot Pick",
+      img: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=1400&q=100",
+    },
+    {
+      id: 4,
+      name: "Loaded Smash Burger",
+      price: 9.49,
+      tag: "Best Seller",
+      img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=1200&q=95",
+    },
+    {
+      id: 5,
+      name: "Masala Loaded Fries",
+      price: 6.99,
+      tag: "Street Style",
+      img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=1200&q=95",
+    },
+    {
+      id: 6,
+      name: "Crispy Hot Wings",
+      price: 7.99,
+      tag: "Fiery",
+      img: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=1200&q=95",
     },
   ];
 
@@ -61,15 +85,13 @@ const Home = () => {
       const cartTop =
         cartRef.current.getBoundingClientRect().top + window.pageYOffset;
 
-      const desktopOffset = 230;
-      const mobileOffset = 155;
-      const offset = window.innerWidth <= 768 ? mobileOffset : desktopOffset;
+      const offset = window.innerWidth <= 768 ? 150 : 220;
 
       window.scrollTo({
         top: Math.max(cartTop - offset, 0),
         behavior: "smooth",
       });
-    }, 180);
+    }, 160);
   };
 
   const addToCart = (item) => {
@@ -134,15 +156,6 @@ const Home = () => {
     setShowSuccessPopup(true);
   };
 
-  const handleBookOrder = () => {
-    if (cart.length === 0) {
-      scrollToCart();
-      return;
-    }
-
-    handleCheckout();
-  };
-
   const closeSuccessPopup = () => {
     setShowSuccessPopup(false);
     setCart([]);
@@ -156,862 +169,873 @@ const Home = () => {
         }
 
         :root {
-          --hb-black: #120707;
-          --hb-red: #e50914;
-          --hb-red-dark: #8f0008;
-          --hb-yellow: #ffbf00;
-          --hb-cream: #fff7ed;
-          --hb-soft: #ffe3d3;
-          --hb-text: #241313;
-          --hb-muted: #6f4e45;
-          --hb-border: rgba(229, 9, 20, 0.22);
+          --ff-black:#130606;
+          --ff-red:#ef233c;
+          --ff-dark-red:#a80015;
+          --ff-yellow:#ffc300;
+          --ff-orange:#ff7a00;
+          --ff-green:#19a974;
+          --ff-cream:#fff6e8;
+          --ff-soft:#ffe1c4;
+          --ff-muted:#6f4e45;
         }
 
-        .hb-home {
+        .ff-home {
           background:
-            radial-gradient(circle at top left, rgba(229,9,20,.14), transparent 35%),
-            var(--hb-cream);
-          color: var(--hb-black);
-          overflow: hidden;
-          font-family: "Inter", sans-serif;
+            radial-gradient(circle at top left, rgba(239,35,60,.15), transparent 34%),
+            radial-gradient(circle at 90% 12%, rgba(255,195,0,.18), transparent 30%),
+            var(--ff-cream);
+          color:var(--ff-black);
+          overflow:hidden;
+          font-family:"Inter",sans-serif;
         }
 
-        .hb-hero {
-          min-height: 100vh;
-          position: relative;
-          display: flex;
-          align-items: center;
-          overflow: hidden;
-          padding: 125px 0 85px;
+        .ff-hero {
+          min-height:100vh;
+          position:relative;
+          display:flex;
+          align-items:center;
+          overflow:hidden;
+          padding:132px 0 90px;
           background:
-            linear-gradient(90deg, rgba(255,247,237,.93), rgba(255,227,211,.74), rgba(143,0,8,.34)),
-            url("https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=1800&q=95") center/cover no-repeat;
+            linear-gradient(90deg, rgba(19,6,6,.86) 0%, rgba(168,0,21,.63) 46%, rgba(255,122,0,.28) 100%),
+            url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1900&q=95") center/cover no-repeat;
+          color:white;
         }
 
-        .hb-video-bg {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 0;
-          transform: scale(1.02);
-          filter: contrast(1.08) saturate(1.18) brightness(1.04);
-        }
-
-        .hb-video-overlay {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
+        .ff-hero::before {
+          content:"";
+          position:absolute;
+          inset:0;
           background:
-            linear-gradient(
-              90deg,
-              rgba(255,247,237,0.93) 0%,
-              rgba(255,235,218,0.78) 42%,
-              rgba(229,9,20,0.42) 100%
-            ),
-            radial-gradient(circle at 78% 36%, rgba(229,9,20,.55), transparent 34%),
-            radial-gradient(circle at 70% 75%, rgba(255,191,0,.34), transparent 32%);
+            radial-gradient(circle at 75% 28%, rgba(255,195,0,.42), transparent 28%),
+            radial-gradient(circle at 82% 72%, rgba(239,35,60,.45), transparent 30%),
+            linear-gradient(180deg, rgba(19,6,6,.12), rgba(19,6,6,.55));
+          z-index:1;
         }
 
-        .hb-hero::after {
-          content: "";
-          position: absolute;
-          inset: auto -10% -18% -10%;
-          height: 260px;
-          background: linear-gradient(to top, var(--hb-cream), transparent);
-          z-index: 2;
+        .ff-hero::after {
+          content:"";
+          position:absolute;
+          left:-10%;
+          right:-10%;
+          bottom:-2px;
+          height:210px;
+          background:linear-gradient(to top, var(--ff-cream), transparent);
+          z-index:2;
         }
 
-        .hb-floating-burger {
-          position: absolute;
-          right: 5%;
-          bottom: 8%;
-          font-size: 260px;
-          opacity: 0.14;
-          animation: floatBurger 7s ease-in-out infinite;
-          pointer-events: none;
-          z-index: 2;
+        .ff-hero-content {
+          position:relative;
+          z-index:3;
+          max-width:820px;
         }
 
-        .hb-hero-content {
-          position: relative;
-          z-index: 3;
-          max-width: 780px;
+        .ff-eyebrow {
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 18px;
+          border-radius:999px;
+          background:rgba(255,255,255,.14);
+          border:1px solid rgba(255,255,255,.22);
+          color:#fff;
+          font-size:12px;
+          letter-spacing:2.5px;
+          text-transform:uppercase;
+          font-weight:1000;
+          margin-bottom:25px;
+          backdrop-filter:blur(14px);
         }
 
-        .hb-eyebrow {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px 18px;
-          border-radius: 999px;
-          background: rgba(255,255,255,.86);
-          border: 1px solid rgba(229,9,20,.24);
-          color: var(--hb-red);
-          font-size: 12px;
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          font-weight: 950;
-          margin-bottom: 26px;
-          box-shadow: 0 15px 35px rgba(229,9,20,.12);
+        .ff-title {
+          font-size:clamp(48px,8vw,106px);
+          line-height:.9;
+          font-weight:1000;
+          margin-bottom:24px;
+          letter-spacing:-4px;
         }
 
-        .hb-title {
-          font-size: clamp(52px, 8vw, 108px);
-          line-height: .9;
-          font-weight: 950;
-          margin-bottom: 24px;
-          letter-spacing: -4px;
+        .ff-title span {
+          display:block;
+          background:linear-gradient(135deg,var(--ff-yellow),#fff,var(--ff-orange));
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
         }
 
-        .hb-title span {
-          display: block;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark), var(--hb-yellow));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .ff-text {
+          color:rgba(255,255,255,.84);
+          font-size:18px;
+          line-height:1.85;
+          max-width:680px;
+          font-weight:650;
         }
 
-        .hb-text {
-          color: var(--hb-muted);
-          font-size: 18px;
-          line-height: 1.9;
-          max-width: 640px;
-          font-weight: 600;
+        .ff-hero-buttons {
+          display:flex;
+          flex-wrap:wrap;
+          gap:16px;
+          margin-top:34px;
         }
 
-        .hb-hero-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 18px;
-          margin-top: 34px;
+        .ff-btn {
+          border:none !important;
+          border-radius:999px !important;
+          font-weight:1000 !important;
+          padding:16px 30px !important;
+          transition:.32s ease;
         }
 
-        .hb-btn {
-          border: none !important;
-          border-radius: 999px !important;
-          font-weight: 950 !important;
-          padding: 16px 30px !important;
-          transition: .35s ease;
+        .ff-btn-primary {
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-dark-red),var(--ff-orange)) !important;
+          color:white !important;
+          box-shadow:0 20px 50px rgba(239,35,60,.38);
         }
 
-        .hb-btn-primary {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
-          color: white !important;
-          box-shadow: 0 20px 50px rgba(229,9,20,.34);
+        .ff-btn-primary:hover {
+          transform:translateY(-5px) scale(1.04);
         }
 
-        .hb-btn-primary:hover {
-          transform: translateY(-5px) scale(1.04);
-          background: linear-gradient(135deg, var(--hb-red-dark), var(--hb-red)) !important;
+        .ff-btn-outline {
+          background:rgba(255,255,255,.14) !important;
+          color:white !important;
+          border:1px solid rgba(255,255,255,.25) !important;
+          backdrop-filter:blur(12px);
         }
 
-        .hb-btn-outline {
-          border: 1px solid rgba(229,9,20,.28) !important;
-          background: rgba(255,255,255,.88) !important;
-          color: var(--hb-black) !important;
+        .ff-btn-outline:hover {
+          background:rgba(255,255,255,.24) !important;
+          transform:translateY(-4px);
         }
 
-        .hb-btn-outline:hover {
-          background: #ffe3d3 !important;
-          transform: translateY(-4px);
+        .ff-floating-food {
+          position:absolute;
+          right:5%;
+          bottom:12%;
+          z-index:2;
+          display:grid;
+          gap:14px;
+          pointer-events:none;
         }
 
-        .hb-stats {
-          margin-top: 45px;
-          display: flex;
-          gap: 20px;
-          flex-wrap: wrap;
+        .ff-floating-food span {
+          width:92px;
+          height:92px;
+          border-radius:28px;
+          display:grid;
+          place-items:center;
+          font-size:42px;
+          background:rgba(255,255,255,.14);
+          border:1px solid rgba(255,255,255,.20);
+          backdrop-filter:blur(12px);
+          box-shadow:0 24px 55px rgba(0,0,0,.22);
+          animation:floatFood 6s ease-in-out infinite;
         }
 
-        .hb-stat {
-          padding: 18px 22px;
-          border-radius: 24px;
-          border: 1px solid rgba(229,9,20,.18);
-          background: rgba(255,255,255,.82);
-          box-shadow: 0 18px 40px rgba(229,9,20,.11);
+        .ff-floating-food span:nth-child(2) {
+          transform:translateX(-45px);
+          animation-delay:.8s;
         }
 
-        .hb-stat h3 {
-          color: var(--hb-red);
-          font-size: 34px;
-          font-weight: 950;
-          margin: 0;
+        .ff-floating-food span:nth-child(3) {
+          animation-delay:1.4s;
         }
 
-        .hb-stat p {
-          color: var(--hb-muted);
-          margin: 0;
-          font-size: 13px;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-weight: 850;
+        .ff-stats {
+          margin-top:42px;
+          display:flex;
+          gap:16px;
+          flex-wrap:wrap;
         }
 
-        .hb-section {
-          padding: 100px 0;
-          position: relative;
+        .ff-stat {
+          padding:17px 21px;
+          border-radius:24px;
+          background:rgba(255,255,255,.14);
+          border:1px solid rgba(255,255,255,.20);
+          backdrop-filter:blur(14px);
         }
 
-        .hb-section.menu-bg {
+        .ff-stat h3 {
+          color:var(--ff-yellow);
+          font-size:32px;
+          font-weight:1000;
+          margin:0;
+        }
+
+        .ff-stat p {
+          color:rgba(255,255,255,.78);
+          margin:0;
+          font-size:12px;
+          text-transform:uppercase;
+          letter-spacing:1px;
+          font-weight:900;
+        }
+
+        .ff-section {
+          padding:96px 0;
+          position:relative;
+        }
+
+        .ff-menu-bg {
           background:
-            linear-gradient(rgba(255,247,237,.76), rgba(255,247,237,.84)),
-            radial-gradient(circle at top right, rgba(229,9,20,.24), transparent 30%),
-            url("https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=1700&q=95") center/cover fixed;
+            linear-gradient(rgba(255,246,232,.82), rgba(255,246,232,.9)),
+            url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1800&q=95") center/cover fixed;
         }
 
-        .hb-section.special-bg {
+        .ff-special-bg {
           background:
-            linear-gradient(rgba(18,7,7,.82), rgba(143,0,8,.78)),
-            url("https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1700&q=95") center/cover fixed;
-          color: white;
+            linear-gradient(rgba(19,6,6,.84), rgba(168,0,21,.82)),
+            url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1800&q=95") center/cover fixed;
+          color:white;
         }
 
-        .hb-section-title {
-          text-align: center;
-          margin-bottom: 65px;
+        .ff-section-title {
+          text-align:center;
+          margin-bottom:60px;
         }
 
-        .hb-section-title h2 {
-          font-size: clamp(38px, 5vw, 68px);
-          font-weight: 950;
-          margin-bottom: 18px;
-          line-height: .95;
-          letter-spacing: -2px;
+        .ff-section-title h2 {
+          font-size:clamp(38px,5vw,68px);
+          font-weight:1000;
+          line-height:.95;
+          letter-spacing:-2px;
+          margin-bottom:16px;
         }
 
-        .hb-section-title p {
-          color: var(--hb-muted);
-          max-width: 700px;
-          margin: auto;
-          line-height: 1.8;
-          font-weight: 600;
+        .ff-section-title p {
+          color:var(--ff-muted);
+          max-width:720px;
+          margin:auto;
+          line-height:1.8;
+          font-weight:650;
         }
 
-        .special-bg .hb-section-title p {
-          color: rgba(255,255,255,.76);
+        .ff-special-bg .ff-section-title p {
+          color:rgba(255,255,255,.75);
         }
 
-        .hb-line {
-          width: 100px;
-          height: 5px;
-          border-radius: 999px;
-          margin: 18px auto 0;
-          background: linear-gradient(90deg, var(--hb-red), var(--hb-yellow));
+        .ff-line {
+          width:105px;
+          height:5px;
+          border-radius:999px;
+          margin:18px auto 0;
+          background:linear-gradient(90deg,var(--ff-red),var(--ff-orange),var(--ff-yellow));
         }
 
-        .hb-category-card {
-          position: relative;
-          overflow: hidden;
-          border-radius: 34px;
-          height: 430px;
-          cursor: pointer;
-          transition: .45s ease;
-          border: 1px solid rgba(229,9,20,.18);
-          box-shadow: 0 28px 70px rgba(18,7,7,.16);
+        .ff-category-card {
+          position:relative;
+          overflow:hidden;
+          border-radius:34px;
+          height:430px;
+          cursor:pointer;
+          transition:.42s ease;
+          border:1px solid rgba(239,35,60,.18);
+          box-shadow:0 28px 70px rgba(19,6,6,.16);
         }
 
-        .hb-category-card img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: 1s ease;
-          filter: brightness(1.08) contrast(1.08) saturate(1.12);
+        .ff-category-card img {
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:1s ease;
+          filter:brightness(1.08) contrast(1.08) saturate(1.14);
         }
 
-        .hb-category-card::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(18,7,7,.88), rgba(229,9,20,.12), transparent 65%);
+        .ff-category-card::after {
+          content:"";
+          position:absolute;
+          inset:0;
+          background:linear-gradient(to top, rgba(19,6,6,.9), rgba(239,35,60,.18), transparent 62%);
         }
 
-        .hb-category-card:hover img {
-          transform: scale(1.12);
+        .ff-category-card:hover {
+          transform:translateY(-12px);
         }
 
-        .hb-category-card:hover {
-          transform: translateY(-12px);
+        .ff-category-card:hover img {
+          transform:scale(1.12);
         }
 
-        .hb-category-content {
-          position: absolute;
-          left: 30px;
-          right: 30px;
-          bottom: 28px;
-          z-index: 2;
-          color: white;
+        .ff-category-content {
+          position:absolute;
+          left:28px;
+          right:28px;
+          bottom:26px;
+          z-index:2;
+          color:white;
         }
 
-        .hb-category-icon {
-          width: 60px;
-          height: 60px;
-          border-radius: 18px;
-          display: grid;
-          place-items: center;
-          margin-bottom: 18px;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-yellow));
-          color: white;
-          font-size: 26px;
-          box-shadow: 0 16px 40px rgba(229,9,20,.35);
+        .ff-category-icon {
+          width:60px;
+          height:60px;
+          border-radius:18px;
+          display:grid;
+          place-items:center;
+          margin-bottom:18px;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange),var(--ff-yellow));
+          color:white;
+          font-size:26px;
+          box-shadow:0 16px 40px rgba(239,35,60,.35);
         }
 
-        .hb-category-content h3 {
-          font-size: 34px;
-          font-weight: 950;
-          margin-bottom: 8px;
+        .ff-category-content h3 {
+          font-size:32px;
+          font-weight:1000;
+          margin-bottom:8px;
         }
 
-        .hb-category-content p {
-          color: rgba(255,255,255,.78);
-          margin: 0;
+        .ff-category-content p {
+          color:rgba(255,255,255,.78);
+          margin:0;
+          line-height:1.6;
+          font-weight:650;
         }
 
-        .hb-food-card {
-          background: rgba(255,255,255,.1);
-          border: 1px solid rgba(255,191,0,.22);
-          border-radius: 30px;
-          overflow: hidden;
-          height: 100%;
-          transition: .4s ease;
-          backdrop-filter: blur(14px);
-          box-shadow: 0 24px 65px rgba(0,0,0,.3);
-          color: white;
+        .ff-food-card {
+          background:rgba(255,255,255,.1);
+          border:1px solid rgba(255,195,0,.22);
+          border-radius:30px;
+          overflow:hidden;
+          height:100%;
+          transition:.38s ease;
+          backdrop-filter:blur(14px);
+          box-shadow:0 24px 65px rgba(0,0,0,.28);
+          color:white;
         }
 
-        .hb-food-card:hover {
-          transform: translateY(-12px);
-          border-color: rgba(255,191,0,.48);
+        .ff-food-card:hover {
+          transform:translateY(-12px);
+          border-color:rgba(255,195,0,.48);
         }
 
-        .hb-food-img {
-          height: 250px;
-          overflow: hidden;
-          position: relative;
+        .ff-food-img {
+          height:245px;
+          overflow:hidden;
+          position:relative;
         }
 
-        .hb-food-img img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: 1s ease;
+        .ff-food-img img {
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:1s ease;
         }
 
-        .hb-food-card:hover img {
-          transform: scale(1.1);
+        .ff-food-card:hover img {
+          transform:scale(1.1);
         }
 
-        .hb-badge {
-          position: absolute !important;
-          top: 18px;
-          left: 18px;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-yellow)) !important;
-          color: white !important;
-          font-weight: 950 !important;
-          padding: 10px 14px !important;
-          border-radius: 999px !important;
+        .ff-badge {
+          position:absolute !important;
+          top:17px;
+          left:17px;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange),var(--ff-yellow)) !important;
+          color:white !important;
+          font-weight:1000 !important;
+          padding:10px 14px !important;
+          border-radius:999px !important;
         }
 
-        .hb-food-content {
-          padding: 28px;
+        .ff-food-content {
+          padding:26px;
         }
 
-        .hb-food-content h3 {
-          font-size: 30px;
-          font-weight: 950;
-          margin-bottom: 12px;
+        .ff-food-content h3 {
+          font-size:27px;
+          font-weight:1000;
+          margin-bottom:10px;
         }
 
-        .hb-food-content p {
-          color: rgba(255,255,255,.76);
-          line-height: 1.8;
+        .ff-food-content p {
+          color:rgba(255,255,255,.74);
+          line-height:1.75;
+          margin:0;
         }
 
-        .hb-price-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: 22px;
+        .ff-price-row {
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-top:22px;
         }
 
-        .hb-price {
-          color: var(--hb-yellow);
-          font-size: 36px;
-          font-weight: 950;
+        .ff-price {
+          color:var(--ff-yellow);
+          font-size:33px;
+          font-weight:1000;
         }
 
-        .hb-add {
-          width: 54px;
-          height: 54px;
-          border-radius: 50% !important;
-          border: none !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
-          color: white !important;
-          font-size: 20px !important;
-          transition: .35s ease;
+        .ff-add {
+          width:54px;
+          height:54px;
+          border-radius:50% !important;
+          border:none !important;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-dark-red)) !important;
+          color:white !important;
+          font-size:20px !important;
+          transition:.32s ease;
         }
 
-        .hb-add:hover {
-          transform: rotate(90deg) scale(1.08);
+        .ff-add:hover {
+          transform:rotate(90deg) scale(1.08);
         }
 
-        .hb-cart-panel {
-          margin-top: 20px;
-          min-height: 536px;
-          border-radius: 36px;
-          padding: 30px;
+        .ff-cart-panel {
+          margin-top:20px;
+          border-radius:36px;
+          padding:30px;
+          min-height:510px;
+          background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,225,196,.9));
+          border:1px solid rgba(239,35,60,.16);
+          box-shadow:0 35px 95px rgba(19,6,6,.14);
+          color:var(--ff-black);
+          scroll-margin-top:220px;
+        }
+
+        .ff-cart-head {
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:24px;
+        }
+
+        .ff-cart-head h3 {
+          margin:0;
+          font-size:33px;
+          font-weight:1000;
+        }
+
+        .ff-cart-count {
+          min-width:43px;
+          height:43px;
+          border-radius:50%;
+          display:grid;
+          place-items:center;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange));
+          color:white;
+          font-weight:1000;
+        }
+
+        .ff-empty-cart {
+          padding:38px 20px;
+          text-align:center;
+          border-radius:26px;
+          border:1px dashed rgba(239,35,60,.28);
+          color:var(--ff-muted);
+          background:rgba(255,255,255,.5);
+        }
+
+        .ff-empty-cart i {
+          display:block;
+          color:var(--ff-red);
+          font-size:44px;
+          margin-bottom:12px;
+        }
+
+        .ff-cart-list {
+          display:grid;
+          grid-template-columns:repeat(3,1fr);
+          gap:16px;
+        }
+
+        .ff-cart-item {
+          display:grid;
+          grid-template-columns:70px 1fr auto;
+          gap:13px;
+          align-items:center;
+          padding:14px;
+          border-radius:24px;
+          background:#fff8f1;
+          border:1px solid rgba(239,35,60,.13);
+        }
+
+        .ff-cart-img {
+          width:70px;
+          height:70px;
+          border-radius:18px;
+          object-fit:cover;
+        }
+
+        .ff-cart-name {
+          font-weight:1000;
+          margin-bottom:4px;
+        }
+
+        .ff-cart-small {
+          color:var(--ff-muted);
+          font-size:13px;
+        }
+
+        .ff-cart-controls {
+          display:flex;
+          align-items:center;
+          gap:8px;
+          margin-top:8px;
+        }
+
+        .ff-qty-btn {
+          width:28px;
+          height:28px;
+          border-radius:50% !important;
+          border:1px solid rgba(239,35,60,.24) !important;
+          background:white !important;
+          color:var(--ff-red) !important;
+          display:grid !important;
+          place-items:center;
+          padding:0 !important;
+        }
+
+        .ff-qty {
+          min-width:24px;
+          text-align:center;
+          font-weight:1000;
+        }
+
+        .ff-remove {
+          border:none !important;
+          background:transparent !important;
+          color:var(--ff-red) !important;
+          padding:0 !important;
+          font-size:18px !important;
+        }
+
+        .ff-cart-price {
+          color:var(--ff-red);
+          font-weight:1000;
+          text-align:right;
+          white-space:nowrap;
+          margin-top:8px;
+        }
+
+        .ff-bill {
+          margin-top:26px;
+          padding-top:22px;
+          border-top:1px solid rgba(239,35,60,.15);
+          max-width:520px;
+          margin-left:auto;
+        }
+
+        .ff-bill-row {
+          display:flex;
+          justify-content:space-between;
+          color:var(--ff-muted);
+          margin-bottom:12px;
+        }
+
+        .ff-bill-row.total {
+          color:var(--ff-black);
+          font-size:24px;
+          font-weight:1000;
+          margin-top:14px;
+        }
+
+        .ff-checkout,
+        .ff-clear {
+          width:100%;
+          border-radius:999px !important;
+          font-weight:1000 !important;
+        }
+
+        .ff-checkout {
+          margin-top:18px;
+          border:none !important;
+          padding:15px !important;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-dark-red),var(--ff-orange)) !important;
+          color:white !important;
+        }
+
+        .ff-clear {
+          margin-top:12px;
+          padding:12px !important;
+          border:1px solid rgba(239,35,60,.2) !important;
+          background:white !important;
+          color:var(--ff-black) !important;
+        }
+
+        .ff-delivery {
+          border-radius:38px;
+          overflow:hidden;
+          position:relative;
+          padding:86px 58px;
+          text-align:center;
           background:
-            linear-gradient(135deg, rgba(255,255,255,.96), rgba(255,227,211,.88));
-          border: 1px solid rgba(229,9,20,.18);
-          box-shadow: 0 35px 95px rgba(18,7,7,.14);
-          color: var(--hb-black);
-          scroll-margin-top: 220px;
-          transition: min-height .25s ease;
-        }
-
-        .hb-cart-head {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 24px;
-        }
-
-        .hb-cart-head h3 {
-          margin: 0;
-          font-size: 34px;
-          font-weight: 950;
-        }
-
-        .hb-cart-count {
-          min-width: 42px;
-          height: 42px;
-          border-radius: 50%;
-          display: grid;
-          place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
-          color: white;
-          font-weight: 950;
-        }
-
-        .hb-empty-cart {
-          padding: 38px 20px;
-          text-align: center;
-          border-radius: 26px;
-          border: 1px dashed rgba(229,9,20,.28);
-          color: var(--hb-muted);
-        }
-
-        .hb-empty-cart i {
-          display: block;
-          color: var(--hb-red);
-          font-size: 44px;
-          margin-bottom: 12px;
-        }
-
-        .hb-cart-list {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 18px;
-        }
-
-        .hb-cart-item {
-          display: grid;
-          grid-template-columns: 70px 1fr auto;
-          gap: 14px;
-          align-items: center;
-          padding: 14px;
-          border-radius: 24px;
-          background: #fff8f1;
-          border: 1px solid rgba(229,9,20,.14);
-        }
-
-        .hb-cart-img {
-          width: 70px;
-          height: 70px;
-          border-radius: 18px;
-          object-fit: cover;
-        }
-
-        .hb-cart-name {
-          font-weight: 950;
-          margin-bottom: 4px;
-        }
-
-        .hb-cart-small {
-          color: var(--hb-muted);
-          font-size: 13px;
-        }
-
-        .hb-cart-controls {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-top: 8px;
-        }
-
-        .hb-qty-btn {
-          width: 28px;
-          height: 28px;
-          border-radius: 50% !important;
-          border: 1px solid rgba(229,9,20,.28) !important;
-          background: white !important;
-          color: var(--hb-red) !important;
-          display: grid !important;
-          place-items: center;
-          padding: 0 !important;
-        }
-
-        .hb-qty {
-          min-width: 24px;
-          text-align: center;
-          font-weight: 900;
-        }
-
-        .hb-remove {
-          border: none !important;
-          background: transparent !important;
-          color: var(--hb-red) !important;
-          padding: 0 !important;
-          font-size: 18px !important;
-        }
-
-        .hb-cart-price {
-          color: var(--hb-red);
-          font-weight: 950;
-          text-align: right;
-          white-space: nowrap;
-          margin-top: 8px;
-        }
-
-        .hb-bill {
-          margin-top: 26px;
-          padding-top: 22px;
-          border-top: 1px solid rgba(229,9,20,.16);
-          max-width: 520px;
-          margin-left: auto;
-        }
-
-        .hb-bill-row {
-          display: flex;
-          justify-content: space-between;
-          color: var(--hb-muted);
-          margin-bottom: 12px;
-        }
-
-        .hb-bill-row.total {
-          color: var(--hb-black);
-          font-size: 24px;
-          font-weight: 950;
-          margin-top: 14px;
-        }
-
-        .hb-checkout,
-        .hb-clear {
-          width: 100%;
-          border-radius: 999px !important;
-          font-weight: 950 !important;
-        }
-
-        .hb-checkout {
-          margin-top: 18px;
-          border: none !important;
-          padding: 15px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
-          color: white !important;
-        }
-
-        .hb-clear {
-          margin-top: 12px;
-          padding: 12px !important;
-          border: 1px solid rgba(229,9,20,.2) !important;
-          background: white !important;
-          color: var(--hb-black) !important;
-        }
-
-        .hb-delivery {
-          border-radius: 38px;
-          overflow: hidden;
-          position: relative;
-          padding: 90px 60px;
-          text-align: center;
-          background:
-            linear-gradient(rgba(143,0,8,.84), rgba(18,7,7,.86)),
+            linear-gradient(rgba(168,0,21,.84), rgba(19,6,6,.87)),
             url("https://images.unsplash.com/photo-1526367790999-0150786686a2?w=1700&q=95") center/cover;
-          box-shadow: 0 35px 100px rgba(18,7,7,.24);
-          color: white;
+          box-shadow:0 35px 100px rgba(19,6,6,.24);
+          color:white;
         }
 
-        .hb-delivery h2 {
-          font-size: clamp(40px,6vw,74px);
-          font-weight: 950;
-          line-height: .95;
-          margin-bottom: 20px;
+        .ff-delivery h2 {
+          font-size:clamp(39px,6vw,74px);
+          font-weight:1000;
+          line-height:.95;
+          margin-bottom:20px;
         }
 
-        .hb-delivery h2 span {
-          color: var(--hb-yellow);
+        .ff-delivery h2 span {
+          color:var(--ff-yellow);
         }
 
-        .hb-delivery p {
-          color: rgba(255,255,255,.78);
-          max-width: 760px;
-          margin: auto;
-          line-height: 1.9;
-          font-size: 18px;
+        .ff-delivery p {
+          color:rgba(255,255,255,.78);
+          max-width:760px;
+          margin:auto;
+          line-height:1.85;
+          font-size:18px;
+          font-weight:650;
         }
 
-        .hb-apps {
-          display: flex;
-          justify-content: center;
-          gap: 18px;
-          flex-wrap: wrap;
-          margin-top: 36px;
+        .ff-apps {
+          display:flex;
+          justify-content:center;
+          gap:16px;
+          flex-wrap:wrap;
+          margin-top:34px;
         }
 
-        .hb-app-btn {
-          min-width: 220px;
-          height: 64px;
-          border-radius: 22px !important;
-          border: 1px solid rgba(255,191,0,.28) !important;
-          background: rgba(255,255,255,.1) !important;
-          color: white !important;
-          display: flex !important;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          font-weight: 900 !important;
-          backdrop-filter: blur(12px);
-          transition: .35s ease;
+        .ff-app-btn {
+          min-width:215px;
+          height:64px;
+          border-radius:22px !important;
+          border:1px solid rgba(255,195,0,.28) !important;
+          background:rgba(255,255,255,.1) !important;
+          color:white !important;
+          display:flex !important;
+          align-items:center;
+          justify-content:center;
+          gap:12px;
+          font-weight:950 !important;
+          backdrop-filter:blur(12px);
+          transition:.32s ease;
         }
 
-        .hb-app-btn i {
-          font-size: 24px;
-          color: var(--hb-yellow);
+        .ff-app-btn i {
+          font-size:24px;
+          color:var(--ff-yellow);
         }
 
-        .hb-app-btn:hover {
-          transform: translateY(-5px);
+        .ff-app-btn:hover {
+          transform:translateY(-5px);
         }
 
-        .hb-success-modal .modal-content {
-          border: 0;
-          border-radius: 34px;
-          overflow: hidden;
-          background: transparent;
-          box-shadow: 0 34px 90px rgba(18,7,7,.28);
+        .ff-success-modal .modal-content {
+          border:0;
+          border-radius:34px;
+          overflow:hidden;
+          background:transparent;
+          box-shadow:0 34px 90px rgba(19,6,6,.28);
         }
 
-        .hb-success-box {
-          position: relative;
-          padding: 42px 32px;
-          text-align: center;
+        .ff-success-box {
+          position:relative;
+          padding:42px 32px;
+          text-align:center;
           background:
-            radial-gradient(circle at top right, rgba(255,191,0,.24), transparent 34%),
-            linear-gradient(135deg, #fff8f1, #ffe3d3);
-          border: 1px solid rgba(229,9,20,.18);
-          color: var(--hb-black);
+            radial-gradient(circle at top right, rgba(255,195,0,.24), transparent 34%),
+            linear-gradient(135deg,#fff8f1,#ffe1c4);
+          border:1px solid rgba(239,35,60,.16);
+          color:var(--ff-black);
         }
 
-        .hb-success-icon {
-          width: 92px;
-          height: 92px;
-          margin: 0 auto 22px;
-          border-radius: 50%;
-          display: grid;
-          place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
-          color: white;
-          font-size: 44px;
-          box-shadow: 0 20px 52px rgba(229,9,20,.34);
-          animation: successPop .45s ease;
+        .ff-success-icon {
+          width:92px;
+          height:92px;
+          margin:0 auto 22px;
+          border-radius:50%;
+          display:grid;
+          place-items:center;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange));
+          color:white;
+          font-size:44px;
+          box-shadow:0 20px 52px rgba(239,35,60,.34);
+          animation:successPop .45s ease;
         }
 
-        .hb-success-box h3 {
-          font-size: 34px;
-          font-weight: 950;
-          margin-bottom: 12px;
+        .ff-success-box h3 {
+          font-size:33px;
+          font-weight:1000;
+          margin-bottom:12px;
         }
 
-        .hb-success-box p {
-          color: var(--hb-muted);
-          font-weight: 650;
-          line-height: 1.75;
-          margin-bottom: 20px;
+        .ff-success-box p {
+          color:var(--ff-muted);
+          font-weight:650;
+          line-height:1.75;
+          margin-bottom:20px;
         }
 
-        .hb-success-total {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 13px 20px;
-          border-radius: 999px;
-          background: white;
-          border: 1px solid rgba(229,9,20,.16);
-          color: var(--hb-red);
-          font-size: 20px;
-          font-weight: 950;
-          margin-bottom: 24px;
-          box-shadow: 0 12px 32px rgba(18,7,7,.08);
+        .ff-success-total {
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          padding:13px 20px;
+          border-radius:999px;
+          background:white;
+          border:1px solid rgba(239,35,60,.14);
+          color:var(--ff-red);
+          font-size:20px;
+          font-weight:1000;
+          margin-bottom:24px;
+          box-shadow:0 12px 32px rgba(19,6,6,.08);
         }
 
-        .hb-success-close {
-          width: 100%;
-          border: none !important;
-          border-radius: 999px !important;
-          padding: 14px 24px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
-          color: white !important;
-          font-weight: 950 !important;
+        .ff-success-close {
+          width:100%;
+          border:none !important;
+          border-radius:999px !important;
+          padding:14px 24px !important;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-dark-red),var(--ff-orange)) !important;
+          color:white !important;
+          font-weight:1000 !important;
         }
 
-        @keyframes floatBurger {
-          0%,100% { transform: translateY(0) rotate(-6deg); }
-          50% { transform: translateY(-20px) rotate(6deg); }
+        @keyframes floatFood {
+          0%,100% { transform:translateY(0) rotate(-5deg); }
+          50% { transform:translateY(-18px) rotate(5deg); }
         }
 
         @keyframes successPop {
-          0% { transform: scale(.7); opacity: 0; }
-          100% { transform: scale(1); opacity: 1; }
+          0% { transform:scale(.7); opacity:0; }
+          100% { transform:scale(1); opacity:1; }
         }
 
-        @media(max-width: 991px) {
-          .hb-hero {
-            text-align: center;
+        @media(max-width:991px) {
+          .ff-hero {
+            text-align:center;
           }
 
-          .hb-hero-content {
-            margin: auto;
+          .ff-hero-content {
+            margin:auto;
           }
 
-          .hb-stats,
-          .hb-hero-buttons {
-            justify-content: center;
+          .ff-hero-buttons,
+          .ff-stats {
+            justify-content:center;
           }
 
-          .hb-category-card {
-            height: 360px;
+          .ff-floating-food {
+            display:none;
           }
 
-          .hb-cart-list {
-            grid-template-columns: 1fr;
+          .ff-category-card {
+            height:360px;
           }
 
-          .hb-bill {
-            max-width: 100%;
+          .ff-cart-list {
+            grid-template-columns:1fr;
+          }
+
+          .ff-bill {
+            max-width:100%;
           }
         }
 
-        @media(max-width: 768px) {
-          .hb-hero {
-            min-height: auto;
-            padding: 115px 0 70px;
+        @media(max-width:768px) {
+          .ff-hero {
+            min-height:auto;
+            padding:118px 0 74px;
+            background-position:center;
           }
 
-          .hb-section {
-            padding: 75px 0;
+          .ff-title {
+            letter-spacing:-2px;
           }
 
-          .hb-delivery,
-          .hb-cart-panel {
-            padding: 28px 20px;
+          .ff-text {
+            font-size:16px;
           }
 
-          .hb-cart-panel {
-            min-height: 520px;
-            scroll-margin-top: 165px;
+          .ff-section {
+            padding:74px 0;
           }
 
-          .hb-food-img {
-            height: 220px;
+          .ff-category-card {
+            height:315px;
+            border-radius:28px;
           }
 
-          .hb-category-card {
-            height: 320px;
+          .ff-food-img {
+            height:220px;
           }
 
-          .hb-title {
-            letter-spacing: -2px;
+          .ff-cart-panel,
+          .ff-delivery {
+            padding:28px 20px;
+            border-radius:28px;
           }
 
-          .hb-floating-burger {
-            font-size: 165px;
-            right: -55px;
-            bottom: 20px;
+          .ff-cart-panel {
+            scroll-margin-top:160px;
           }
 
-          .hb-cart-item {
-            grid-template-columns: 62px 1fr;
+          .ff-cart-item {
+            grid-template-columns:62px 1fr;
           }
 
-          .hb-cart-price {
-            text-align: left;
+          .ff-cart-price {
+            text-align:left;
           }
 
-          .hb-btn {
-            width: 100%;
+          .ff-btn {
+            width:100%;
+          }
+
+          .ff-app-btn {
+            width:100%;
           }
         }
       `}</style>
 
-      <main className="hb-home">
-        <section className="hb-hero">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="hb-video-bg"
-            poster="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=1800&q=95"
-          >
-            <source src="/videos/hero.mp4" type="video/mp4" />
-          </video>
-
-          <div className="hb-video-overlay"></div>
-          <div className="hb-floating-burger">🍔</div>
+      <main className="ff-home">
+        <section className="ff-hero">
+          <div className="ff-floating-food">
+            <span>🍜</span>
+            <span>🍛</span>
+            <span>🥟</span>
+          </div>
 
           <Container>
-            <div className="hb-hero-content">
-              <div className="hb-eyebrow">
+            <div className="ff-hero-content">
+              <div className="ff-eyebrow">
                 <i className="bi bi-fire"></i>
-                Fresh • Hot • 100% Halal
+                Chinese • Desi • Burgers • 100% Halal
               </div>
 
-              <h1 className="hb-title">
-                Taste That
-                <span>Hits Different.</span>
+              <h1 className="ff-title">
+                Crazy Flavours
+                <span>One Place.</span>
               </h1>
 
-              <p className="hb-text">
-                Flame-grilled burgers, crispy chicken, loaded fries and bold
-                street flavours crafted fresh for real food lovers.
+              <p className="ff-text">
+                From spicy Chinese noodles and steamy momos to chicken karahi,
+                loaded fries, hot wings and juicy burgers — every bite is made
+                fresh, bold and full of restaurant-style energy.
               </p>
 
-              <div className="hb-hero-buttons">
-                <Button className="hb-btn hb-btn-primary" onClick={handleBookOrder}>
-                  <i className="bi bi-bag-fill me-2"></i>
+              <div className="ff-hero-buttons">
+                <Button className="ff-btn ff-btn-primary" onClick={handleCheckout}>
+                  <i className="bi bi-bag-heart-fill me-2"></i>
                   Book Order
                 </Button>
 
-                <Button
-                  className="hb-btn hb-btn-outline"
-                  onClick={() => navigate("/menu")}
-                >
+                <Button className="ff-btn ff-btn-outline" onClick={() => navigate("/menu")}>
                   View Full Menu
                 </Button>
               </div>
 
-              <div className="hb-stats">
-                <div className="hb-stat">
+              <div className="ff-stats">
+                <div className="ff-stat">
                   <h3>4.8★</h3>
                   <p>Customer Rating</p>
                 </div>
 
-                <div className="hb-stat">
-                  <h3>11+</h3>
-                  <p>Branches</p>
+                <div className="ff-stat">
+                  <h3>25+</h3>
+                  <p>Food Items</p>
                 </div>
 
-                <div className="hb-stat">
+                <div className="ff-stat">
                   <h3>20K+</h3>
                   <p>Orders Served</p>
                 </div>
@@ -1020,30 +1044,30 @@ const Home = () => {
           </Container>
         </section>
 
-        <section className="hb-section menu-bg">
+        <section className="ff-section ff-menu-bg">
           <Container>
-            <div className="hb-section-title">
-              <h2>Explore Our Menu</h2>
+            <div className="ff-section-title">
+              <h2>Explore The Madness</h2>
               <p>
-                Crafted with premium ingredients, bold spices and unforgettable
-                flavour.
+                A bold restaurant menu packed with Chinese street food, desi
+                classics, spicy sauces and proper fresh comfort food.
               </p>
-              <div className="hb-line"></div>
+              <div className="ff-line"></div>
             </div>
 
             <Row className="g-4">
               {categories.map((item, index) => (
                 <Col lg={4} md={6} key={index}>
-                  <div className="hb-category-card" onClick={() => navigate("/menu")}>
+                  <div className="ff-category-card" onClick={() => navigate("/menu")}>
                     <img src={item.img} alt={item.title} />
 
-                    <div className="hb-category-content">
-                      <div className="hb-category-icon">
+                    <div className="ff-category-content">
+                      <div className="ff-category-icon">
                         <i className={item.icon}></i>
                       </div>
 
                       <h3>{item.title}</h3>
-                      <p>Freshly made daily with signature sauces and premium ingredients.</p>
+                      <p>{item.desc}</p>
                     </div>
                   </div>
                 </Col>
@@ -1052,31 +1076,36 @@ const Home = () => {
           </Container>
         </section>
 
-        <section className="hb-section special-bg">
+        <section className="ff-section ff-special-bg">
           <Container>
-            <div className="hb-section-title">
+            <div className="ff-section-title">
               <h2>Featured Specials</h2>
-              <p>Most loved meals selected by our customers.</p>
-              <div className="hb-line"></div>
+              <p>
+                Chinese, desi and fast food favourites selected for real cravings.
+              </p>
+              <div className="ff-line"></div>
             </div>
 
             <Row className="g-4">
               {featured.map((item) => (
                 <Col lg={4} md={6} key={item.id}>
-                  <Card className="hb-food-card">
-                    <div className="hb-food-img">
+                  <Card className="ff-food-card">
+                    <div className="ff-food-img">
                       <img src={item.img} alt={item.name} />
-                      <Badge className="hb-badge">{item.tag}</Badge>
+                      <Badge className="ff-badge">{item.tag}</Badge>
                     </div>
 
-                    <div className="hb-food-content">
+                    <div className="ff-food-content">
                       <h3>{item.name}</h3>
-                      <p>Loaded with premium ingredients, melted cheese and signature flavours.</p>
+                      <p>
+                        Freshly prepared with bold spices, signature sauces and
+                        proper restaurant-style flavour.
+                      </p>
 
-                      <div className="hb-price-row">
-                        <div className="hb-price">£{item.price.toFixed(2)}</div>
+                      <div className="ff-price-row">
+                        <div className="ff-price">£{item.price.toFixed(2)}</div>
 
-                        <Button className="hb-add" onClick={() => addToCart(item)}>
+                        <Button className="ff-add" onClick={() => addToCart(item)}>
                           <i className="bi bi-plus-lg"></i>
                         </Button>
                       </div>
@@ -1088,50 +1117,52 @@ const Home = () => {
           </Container>
         </section>
 
-        <section className="hb-section">
+        <section className="ff-section">
           <Container>
-            <div className="hb-cart-panel" ref={cartRef}>
-              <div className="hb-cart-head">
+            <div className="ff-cart-panel" ref={cartRef}>
+              <div className="ff-cart-head">
                 <h3>Your Cart</h3>
-                <div className="hb-cart-count">{totalItems}</div>
+                <div className="ff-cart-count">{totalItems}</div>
               </div>
 
               {cart.length === 0 ? (
-                <div className="hb-empty-cart">
-                  <i className="bi bi-bag"></i>
+                <div className="ff-empty-cart">
+                  <i className="bi bi-bag-heart"></i>
                   <strong>No items added yet</strong>
-                  <p className="mb-0 mt-2">Click plus button to add featured meals.</p>
+                  <p className="mb-0 mt-2">
+                    Tap the plus button on any featured meal to add it here.
+                  </p>
                 </div>
               ) : (
                 <>
-                  <div className="hb-cart-list">
+                  <div className="ff-cart-list">
                     {cart.map((item) => (
-                      <div className="hb-cart-item" key={item.id}>
-                        <img src={item.img} alt={item.name} className="hb-cart-img" />
+                      <div className="ff-cart-item" key={item.id}>
+                        <img src={item.img} alt={item.name} className="ff-cart-img" />
 
                         <div>
-                          <div className="hb-cart-name">{item.name}</div>
-                          <div className="hb-cart-small">£{item.price.toFixed(2)} each</div>
+                          <div className="ff-cart-name">{item.name}</div>
+                          <div className="ff-cart-small">£{item.price.toFixed(2)} each</div>
 
-                          <div className="hb-cart-controls">
-                            <Button className="hb-qty-btn" onClick={() => decreaseQty(item.id)}>
+                          <div className="ff-cart-controls">
+                            <Button className="ff-qty-btn" onClick={() => decreaseQty(item.id)}>
                               <i className="bi bi-dash"></i>
                             </Button>
 
-                            <span className="hb-qty">{item.quantity}</span>
+                            <span className="ff-qty">{item.quantity}</span>
 
-                            <Button className="hb-qty-btn" onClick={() => increaseQty(item.id)}>
+                            <Button className="ff-qty-btn" onClick={() => increaseQty(item.id)}>
                               <i className="bi bi-plus"></i>
                             </Button>
                           </div>
                         </div>
 
                         <div>
-                          <Button className="hb-remove" onClick={() => removeItem(item.id)}>
+                          <Button className="ff-remove" onClick={() => removeItem(item.id)}>
                             <i className="bi bi-x-circle"></i>
                           </Button>
 
-                          <div className="hb-cart-price">
+                          <div className="ff-cart-price">
                             £{(item.price * item.quantity).toFixed(2)}
                           </div>
                         </div>
@@ -1139,28 +1170,28 @@ const Home = () => {
                     ))}
                   </div>
 
-                  <div className="hb-bill">
-                    <div className="hb-bill-row">
+                  <div className="ff-bill">
+                    <div className="ff-bill-row">
                       <span>Subtotal</span>
                       <strong>£{subtotal.toFixed(2)}</strong>
                     </div>
 
-                    <div className="hb-bill-row">
+                    <div className="ff-bill-row">
                       <span>Delivery Fee</span>
                       <strong>£{deliveryFee.toFixed(2)}</strong>
                     </div>
 
-                    <div className="hb-bill-row total">
+                    <div className="ff-bill-row total">
                       <span>Total</span>
                       <span>£{total.toFixed(2)}</span>
                     </div>
 
-                    <Button className="hb-checkout" onClick={handleCheckout}>
+                    <Button className="ff-checkout" onClick={handleCheckout}>
                       <i className="bi bi-credit-card-fill me-2"></i>
                       Checkout / Book Order
                     </Button>
 
-                    <Button className="hb-clear" onClick={clearCart}>
+                    <Button className="ff-clear" onClick={clearCart}>
                       Clear Cart
                     </Button>
                   </div>
@@ -1170,26 +1201,26 @@ const Home = () => {
           </Container>
         </section>
 
-        <section className="hb-section">
+        <section className="ff-section">
           <Container>
-            <div className="hb-delivery">
+            <div className="ff-delivery">
               <h2>
-                Fast Delivery.
-                <span> Hot & Fresh.</span>
+                Fresh Food.
+                <span> Fast Delivery.</span>
               </h2>
 
               <p>
-                Download our app and enjoy exclusive discounts, loyalty rewards
-                and lightning-fast food delivery.
+                Order Chinese, desi food, burgers, wings and loaded fries from
+                one place. Hot meals, fresh prep and flavour that hits different.
               </p>
 
-              <div className="hb-apps">
-                <Button className="hb-app-btn">
+              <div className="ff-apps">
+                <Button className="ff-app-btn">
                   <i className="bi bi-apple"></i>
                   App Store
                 </Button>
 
-                <Button className="hb-app-btn">
+                <Button className="ff-app-btn">
                   <i className="bi bi-google-play"></i>
                   Google Play
                 </Button>
@@ -1203,26 +1234,26 @@ const Home = () => {
         show={showSuccessPopup}
         onHide={closeSuccessPopup}
         centered
-        className="hb-success-modal"
+        className="ff-success-modal"
       >
-        <div className="hb-success-box">
-          <div className="hb-success-icon">
+        <div className="ff-success-box">
+          <div className="ff-success-icon">
             <i className="bi bi-check2-circle"></i>
           </div>
 
           <h3>Order Booked Successfully!</h3>
 
           <p>
-            Thank you for your order. Your meal request has been received and
+            Thank you for your order. Your food request has been received and
             our team will prepare it fresh for you.
           </p>
 
-          <div className="hb-success-total">
+          <div className="ff-success-total">
             <i className="bi bi-receipt"></i>
             Total: £{confirmedTotal.toFixed(2)}
           </div>
 
-          <Button className="hb-success-close" onClick={closeSuccessPopup}>
+          <Button className="ff-success-close" onClick={closeSuccessPopup}>
             Continue Ordering
           </Button>
         </div>

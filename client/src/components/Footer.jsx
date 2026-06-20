@@ -18,7 +18,7 @@ const Footer = () => {
       return;
     }
 
-    alert("Thank you! You have subscribed for weekly deals.");
+    alert("Thank you! You have subscribed for weekly food deals.");
     setEmail("");
   };
 
@@ -34,360 +34,495 @@ const Footer = () => {
     <>
       <style>{`
         :root {
-          --hb-black: #120707;
-          --hb-red: #e50914;
-          --hb-red-dark: #8f0008;
-          --hb-yellow: #ffbf00;
-          --hb-cream: #fff7ed;
-          --hb-soft: #ffe3d3;
-          --hb-muted: #6f4e45;
+          --ff-black:#130606;
+          --ff-red:#ef233c;
+          --ff-dark-red:#a80015;
+          --ff-yellow:#ffc300;
+          --ff-orange:#ff7a00;
+          --ff-green:#19a974;
+          --ff-cream:#fff6e8;
+          --ff-soft:#ffe1c4;
+          --ff-muted:#6f4e45;
         }
 
-        .hb-footer {
-          position: relative;
-          overflow: hidden;
+        .ff-footer {
+          position:relative;
+          overflow:hidden;
           background:
-            radial-gradient(circle at top left, rgba(229,9,20,.2), transparent 32%),
-            radial-gradient(circle at bottom right, rgba(255,191,0,.18), transparent 30%),
-            linear-gradient(160deg, #fff7ed, #ffe3d3);
-          color: var(--hb-black);
-          border-top: 1px solid rgba(229,9,20,.18);
-          font-family: "Inter", sans-serif;
+            radial-gradient(circle at 8% 10%, rgba(255,195,0,.28), transparent 26%),
+            radial-gradient(circle at 90% 12%, rgba(239,35,60,.22), transparent 28%),
+            radial-gradient(circle at 85% 90%, rgba(25,169,116,.16), transparent 30%),
+            linear-gradient(160deg,#fff6e8,#ffe1c4);
+          color:var(--ff-black);
+          border-top:1px solid rgba(239,35,60,.16);
+          font-family:"Inter",sans-serif;
         }
 
-        .hb-footer-wrapper {
-          max-width: 1320px;
-          margin: auto;
-          padding: 95px 24px 70px;
-          position: relative;
-          z-index: 2;
+        .ff-footer::before,
+        .ff-footer::after {
+          content:"";
+          position:absolute;
+          width:260px;
+          height:260px;
+          border-radius:50%;
+          filter:blur(8px);
+          opacity:.26;
+          pointer-events:none;
         }
 
-        .hb-top {
-          display: grid;
-          grid-template-columns: 1.3fr 1fr 1fr 1.1fr;
-          gap: 55px;
+        .ff-footer::before {
+          left:-95px;
+          top:80px;
+          background:var(--ff-red);
         }
 
-        .hb-brand {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          margin-bottom: 24px;
+        .ff-footer::after {
+          right:-95px;
+          bottom:80px;
+          background:var(--ff-yellow);
         }
 
-        .hb-brand-logo {
-          width: 82px;
-          height: 82px;
-          object-fit: contain;
-          display: block;
-          filter: drop-shadow(0 18px 35px rgba(229,9,20,.28));
+        .ff-footer-wrapper {
+          max-width:1320px;
+          margin:auto;
+          padding:95px 24px 55px;
+          position:relative;
+          z-index:2;
         }
 
-        .hb-brand-text {
-          font-size: 38px;
-          font-weight: 950;
-          color: var(--hb-black);
-          line-height: 1;
-          letter-spacing: -1px;
+        .ff-top {
+          display:grid;
+          grid-template-columns:1.25fr .9fr .9fr 1.15fr;
+          gap:46px;
         }
 
-        .hb-brand-text span {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark), var(--hb-yellow));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .ff-brand {
+          display:flex;
+          align-items:center;
+          gap:14px;
+          margin-bottom:22px;
         }
 
-        .hb-tagline {
-          color: var(--hb-red);
-          font-size: 18px;
-          font-weight: 950;
-          margin-bottom: 18px;
+        .ff-brand-logo {
+          width:82px;
+          height:82px;
+          object-fit:contain;
+          filter:drop-shadow(0 18px 35px rgba(239,35,60,.28));
         }
 
-        .hb-description {
-          color: var(--hb-muted);
-          line-height: 1.9;
-          font-size: 15px;
-          margin-bottom: 30px;
-          font-weight: 600;
+        .ff-brand-text {
+          display:flex;
+          flex-direction:column;
+          line-height:.95;
         }
 
-        .hb-socials {
-          display: flex;
-          gap: 14px;
-          flex-wrap: wrap;
+        .ff-brand-name {
+          font-size:38px;
+          font-weight:1000;
+          letter-spacing:-1px;
+          color:var(--ff-black);
         }
 
-        .hb-socials a {
-          width: 52px;
-          height: 52px;
-          border-radius: 18px;
-          display: grid;
-          place-items: center;
-          text-decoration: none;
-          color: var(--hb-red);
-          font-size: 19px;
-          background: rgba(255,255,255,.75);
-          border: 1px solid rgba(229,9,20,.16);
-          transition: .35s ease;
+        .ff-brand-name span {
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange),var(--ff-yellow));
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
         }
 
-        .hb-socials a:hover {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
-          color: white;
-          transform: translateY(-7px) scale(1.08);
-          box-shadow: 0 22px 50px rgba(229,9,20,.26);
+        .ff-brand-small {
+          margin-top:6px;
+          font-size:11px;
+          font-weight:1000;
+          letter-spacing:1.2px;
+          text-transform:uppercase;
+          color:rgba(19,6,6,.58);
         }
 
-        .hb-heading {
-          font-size: 22px;
-          font-weight: 950;
-          margin-bottom: 28px;
-          position: relative;
+        .ff-tagline {
+          display:inline-flex;
+          align-items:center;
+          gap:8px;
+          padding:10px 14px;
+          border-radius:999px;
+          background:rgba(255,255,255,.75);
+          border:1px solid rgba(239,35,60,.14);
+          color:var(--ff-red);
+          font-size:14px;
+          font-weight:1000;
+          margin-bottom:18px;
+          box-shadow:0 12px 28px rgba(19,6,6,.06);
         }
 
-        .hb-heading::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -12px;
-          width: 58px;
-          height: 4px;
-          border-radius: 999px;
-          background: linear-gradient(90deg, var(--hb-red), var(--hb-yellow));
+        .ff-description {
+          color:var(--ff-muted);
+          line-height:1.85;
+          font-size:15px;
+          margin-bottom:25px;
+          font-weight:650;
         }
 
-        .hb-links {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+        .ff-food-pills {
+          display:flex;
+          flex-wrap:wrap;
+          gap:9px;
+          margin-bottom:28px;
         }
 
-        .hb-links li {
-          margin-bottom: 16px;
+        .ff-food-pills span {
+          padding:9px 13px;
+          border-radius:999px;
+          background:#fff;
+          color:var(--ff-black);
+          border:1px solid rgba(239,35,60,.10);
+          font-size:12px;
+          font-weight:1000;
+          box-shadow:0 10px 24px rgba(19,6,6,.06);
         }
 
-        .hb-links a,
-        .hb-links button {
-          color: var(--hb-muted);
-          text-decoration: none;
-          transition: .3s ease;
-          font-size: 15px;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          background: transparent;
-          border: none;
-          padding: 0;
-          font-weight: 700;
+        .ff-socials {
+          display:flex;
+          gap:12px;
+          flex-wrap:wrap;
         }
 
-        .hb-links a::before,
-        .hb-links button::before {
-          content: "➜";
-          color: var(--hb-red);
-          font-size: 12px;
+        .ff-socials a {
+          width:50px;
+          height:50px;
+          border-radius:17px;
+          display:grid;
+          place-items:center;
+          text-decoration:none;
+          color:var(--ff-red);
+          font-size:19px;
+          background:rgba(255,255,255,.78);
+          border:1px solid rgba(239,35,60,.14);
+          transition:.32s ease;
         }
 
-        .hb-links a:hover,
-        .hb-links button:hover {
-          color: var(--hb-red);
-          transform: translateX(8px);
+        .ff-socials a:hover {
+          color:#fff;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange));
+          transform:translateY(-7px) scale(1.06);
+          box-shadow:0 20px 46px rgba(239,35,60,.24);
         }
 
-        .hb-contact-box {
-          display: flex;
-          align-items: flex-start;
-          gap: 15px;
-          margin-bottom: 22px;
-          padding: 14px;
-          border-radius: 18px;
-          background: rgba(255,255,255,.78);
-          border: 1px solid rgba(229,9,20,.14);
-          transition: .3s ease;
+        .ff-heading {
+          font-size:21px;
+          font-weight:1000;
+          margin-bottom:27px;
+          position:relative;
         }
 
-        .hb-contact-icon {
-          min-width: 46px;
-          height: 46px;
-          border-radius: 14px;
-          display: grid;
-          place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
-          color: white;
-          font-size: 18px;
+        .ff-heading::after {
+          content:"";
+          position:absolute;
+          left:0;
+          bottom:-12px;
+          width:58px;
+          height:4px;
+          border-radius:999px;
+          background:linear-gradient(90deg,var(--ff-red),var(--ff-orange),var(--ff-yellow));
         }
 
-        .hb-contact-box h6 {
-          margin: 0 0 4px;
-          font-weight: 950;
-          font-size: 15px;
+        .ff-links {
+          list-style:none;
+          padding:0;
+          margin:0;
         }
 
-        .hb-contact-box p,
-        .hb-contact-box a {
-          margin: 0;
-          color: var(--hb-muted);
-          font-size: 14px;
-          line-height: 1.7;
-          text-decoration: none;
-          font-weight: 600;
+        .ff-links li {
+          margin-bottom:15px;
         }
 
-        .hb-newsletter {
-          margin-top: 20px;
-          padding: 24px;
-          border-radius: 24px;
+        .ff-links a,
+        .ff-links button {
+          color:var(--ff-muted);
+          text-decoration:none;
+          transition:.28s ease;
+          font-size:15px;
+          display:inline-flex;
+          align-items:center;
+          gap:10px;
+          background:transparent;
+          border:0;
+          padding:0;
+          font-weight:800;
+          cursor:pointer;
+        }
+
+        .ff-links a::before,
+        .ff-links button::before {
+          content:"🔥";
+          font-size:13px;
+        }
+
+        .ff-links a:hover,
+        .ff-links button:hover {
+          color:var(--ff-red);
+          transform:translateX(7px);
+        }
+
+        .ff-contact-box {
+          display:flex;
+          align-items:flex-start;
+          gap:14px;
+          margin-bottom:14px;
+          padding:14px;
+          border-radius:20px;
+          background:rgba(255,255,255,.78);
+          border:1px solid rgba(239,35,60,.13);
+          box-shadow:0 10px 26px rgba(19,6,6,.045);
+          transition:.28s ease;
+        }
+
+        .ff-contact-box:hover {
+          transform:translateY(-3px);
+          box-shadow:0 18px 38px rgba(19,6,6,.08);
+        }
+
+        .ff-contact-icon {
+          min-width:46px;
+          height:46px;
+          border-radius:15px;
+          display:grid;
+          place-items:center;
+          color:#fff;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-orange));
+          font-size:18px;
+        }
+
+        .ff-contact-box h6 {
+          margin:0 0 4px;
+          font-weight:1000;
+          font-size:15px;
+        }
+
+        .ff-contact-box p,
+        .ff-contact-box a {
+          margin:0;
+          color:var(--ff-muted);
+          font-size:14px;
+          line-height:1.65;
+          text-decoration:none;
+          font-weight:650;
+        }
+
+        .ff-newsletter {
+          margin-top:18px;
+          padding:22px;
+          border-radius:24px;
           background:
-            linear-gradient(135deg, rgba(229,9,20,.12), rgba(255,191,0,.16)),
+            linear-gradient(135deg,rgba(239,35,60,.12),rgba(255,195,0,.17)),
             rgba(255,255,255,.78);
-          border: 1px solid rgba(229,9,20,.16);
+          border:1px solid rgba(239,35,60,.14);
+          box-shadow:0 15px 36px rgba(19,6,6,.06);
         }
 
-        .hb-newsletter h5 {
-          font-weight: 950;
-          margin-bottom: 10px;
+        .ff-newsletter h5 {
+          font-weight:1000;
+          margin-bottom:8px;
         }
 
-        .hb-newsletter p {
-          color: var(--hb-muted);
-          font-size: 14px;
-          line-height: 1.7;
-          margin-bottom: 18px;
-          font-weight: 600;
+        .ff-newsletter p {
+          color:var(--ff-muted);
+          font-size:14px;
+          line-height:1.65;
+          margin-bottom:16px;
+          font-weight:650;
         }
 
-        .hb-newsletter-input {
-          width: 100%;
-          height: 52px;
-          border-radius: 16px;
-          border: 1px solid rgba(229,9,20,.2);
-          background: #fff8f1;
-          color: var(--hb-black);
-          padding: 0 18px;
-          outline: none;
-          margin-bottom: 14px;
+        .ff-newsletter-input {
+          width:100%;
+          height:52px;
+          border-radius:16px;
+          border:1px solid rgba(239,35,60,.18);
+          background:#fffaf4;
+          color:var(--ff-black);
+          padding:0 17px;
+          outline:none;
+          margin-bottom:12px;
+          font-weight:700;
         }
 
-        .hb-newsletter-btn {
-          width: 100%;
-          height: 52px;
-          border: none;
-          border-radius: 16px;
-          font-weight: 950;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
-          color: white;
-          transition: .3s ease;
+        .ff-newsletter-input:focus {
+          border-color:var(--ff-red);
+          box-shadow:0 0 0 4px rgba(239,35,60,.10);
         }
 
-        .hb-bottom {
-          margin-top: 70px;
-          padding-top: 28px;
-          border-top: 1px solid rgba(229,9,20,.16);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 20px;
-          flex-wrap: wrap;
+        .ff-newsletter-btn {
+          width:100%;
+          height:52px;
+          border:0;
+          border-radius:16px;
+          font-weight:1000;
+          color:#fff;
+          background:linear-gradient(135deg,var(--ff-red),var(--ff-dark-red),var(--ff-orange));
+          box-shadow:0 15px 32px rgba(239,35,60,.24);
+          transition:.28s ease;
         }
 
-        .hb-bottom p {
-          margin: 0;
-          color: var(--hb-muted);
-          font-size: 14px;
-          font-weight: 600;
+        .ff-newsletter-btn:hover {
+          transform:translateY(-3px);
         }
 
-        .hb-bottom strong {
-          color: var(--hb-red);
+        .ff-bottom {
+          margin-top:64px;
+          padding:24px 0 0;
+          border-top:1px solid rgba(239,35,60,.14);
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:18px;
+          flex-wrap:wrap;
         }
 
-        .hb-payments {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
+        .ff-bottom p {
+          margin:0;
+          color:var(--ff-muted);
+          font-size:14px;
+          font-weight:700;
         }
 
-        .hb-payments span {
-          width: 48px;
-          height: 48px;
-          border-radius: 14px;
-          display: grid;
-          place-items: center;
-          background: rgba(255,255,255,.78);
-          border: 1px solid rgba(229,9,20,.16);
-          color: var(--hb-red);
-          font-size: 18px;
+        .ff-bottom strong {
+          color:var(--ff-red);
         }
 
-        @media (max-width: 1100px) {
-          .hb-top {
-            grid-template-columns: repeat(2,1fr);
+        .ff-payments {
+          display:flex;
+          gap:10px;
+          flex-wrap:wrap;
+        }
+
+        .ff-payments span {
+          width:47px;
+          height:47px;
+          border-radius:15px;
+          display:grid;
+          place-items:center;
+          background:rgba(255,255,255,.8);
+          border:1px solid rgba(239,35,60,.13);
+          color:var(--ff-red);
+          font-size:18px;
+        }
+
+        @media(max-width:1100px) {
+          .ff-top {
+            grid-template-columns:repeat(2,1fr);
           }
         }
 
-        @media (max-width: 700px) {
-          .hb-footer-wrapper {
-            padding: 70px 20px 50px;
+        @media(max-width:700px) {
+          .ff-footer-wrapper {
+            padding:68px 18px 42px;
           }
 
-          .hb-top {
-            grid-template-columns: 1fr;
-            gap: 45px;
+          .ff-top {
+            grid-template-columns:1fr;
+            gap:42px;
           }
 
-          .hb-brand-logo {
-            width: 72px;
-            height: 72px;
+          .ff-brand-logo {
+            width:70px;
+            height:70px;
           }
 
-          .hb-brand-text {
-            font-size: 32px;
+          .ff-brand-name {
+            font-size:31px;
           }
 
-          .hb-bottom {
-            flex-direction: column;
-            text-align: center;
+          .ff-brand-small {
+            font-size:9px;
           }
 
-          .hb-payments {
-            justify-content: center;
+          .ff-tagline {
+            font-size:13px;
+          }
+
+          .ff-heading {
+            font-size:20px;
+          }
+
+          .ff-contact-box {
+            border-radius:18px;
+          }
+
+          .ff-bottom {
+            flex-direction:column;
+            text-align:center;
+          }
+
+          .ff-payments {
+            justify-content:center;
+          }
+        }
+
+        @media(max-width:380px) {
+          .ff-brand-name {
+            font-size:27px;
+          }
+
+          .ff-brand-logo {
+            width:62px;
+            height:62px;
+          }
+
+          .ff-food-pills span {
+            font-size:11px;
+            padding:8px 10px;
           }
         }
       `}</style>
 
-      <footer className="hb-footer">
-        <div className="hb-footer-wrapper">
-          <div className="hb-top">
+      <footer className="ff-footer">
+        <div className="ff-footer-wrapper">
+          <div className="ff-top">
             <div>
-              <div className="hb-brand">
-                <img src={LOGO} alt="Fast Food Logo" className="hb-brand-logo" />
+              <div className="ff-brand">
+                <img src={LOGO} alt="Fast Food Logo" className="ff-brand-logo" />
 
-                <div className="hb-brand-text">
-                  FAST<span> FOOD</span>
+                <div className="ff-brand-text">
+                  <div className="ff-brand-name">
+                    FAST<span>FOOD</span>
+                  </div>
+                  <div className="ff-brand-small">Chinese • Desi • Burgers</div>
                 </div>
               </div>
 
-              <div className="hb-tagline">“Fresh. Spicy. Made To Crave.”</div>
+              <div className="ff-tagline">🔥 Fresh. Spicy. Made To Crave.</div>
 
-              <p className="hb-description">
-                Premium burgers, crispy chicken, loaded fries and flame-grilled
-                flavours crafted for true food lovers. Fast delivery, fresh
-                ingredients and unforgettable taste.
+              <p className="ff-description">
+                Enjoy a bold mix of crispy burgers, Chinese noodles, spicy desi
+                food, loaded fries, wings and family deals — freshly prepared,
+                packed with flavour and made for serious cravings.
               </p>
 
-              <div className="hb-socials">
-                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i className="bi bi-instagram"></i></a>
-                <a href="https://www.facebook.com/" target="_blank" rel="noreferrer"><i className="bi bi-facebook"></i></a>
-                <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer"><i className="bi bi-tiktok"></i></a>
-                <a href="https://www.youtube.com/" target="_blank" rel="noreferrer"><i className="bi bi-youtube"></i></a>
+              <div className="ff-food-pills">
+                <span>🍔 Burgers</span>
+                <span>🍜 Chinese</span>
+                <span>🍛 Desi Food</span>
+                <span>🍟 Loaded Fries</span>
+                <span>🔥 Hot Wings</span>
+              </div>
+
+              <div className="ff-socials">
+                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
+                  <i className="bi bi-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">
+                  <i className="bi bi-facebook"></i>
+                </a>
+                <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer">
+                  <i className="bi bi-tiktok"></i>
+                </a>
+                <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">
+                  <i className="bi bi-youtube"></i>
+                </a>
               </div>
             </div>
 
             <div>
-              <h4 className="hb-heading">Quick Links</h4>
-              <ul className="hb-links">
+              <h4 className="ff-heading">Quick Links</h4>
+              <ul className="ff-links">
                 {quickLinks.map((link, index) => (
                   <li key={index}>
                     <NavLink to={link.path}>{link.name}</NavLink>
@@ -400,28 +535,28 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="hb-heading">Popular Items</h4>
-              <ul className="hb-links">
+              <h4 className="ff-heading">Food Categories</h4>
+              <ul className="ff-links">
+                <li><button onClick={() => navigate("/menu")}>Chinese Food</button></li>
+                <li><button onClick={() => navigate("/menu")}>Desi Specials</button></li>
                 <li><button onClick={() => navigate("/menu")}>Signature Burgers</button></li>
                 <li><button onClick={() => navigate("/menu")}>Loaded Fries</button></li>
-                <li><button onClick={() => navigate("/menu")}>Smash Burgers</button></li>
                 <li><button onClick={() => navigate("/menu")}>Hot Wings</button></li>
                 <li><button onClick={() => navigate("/deals")}>Family Deals</button></li>
-                <li><button onClick={() => navigate("/menu")}>Milkshakes</button></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="hb-heading">Contact Us</h4>
+              <h4 className="ff-heading">Contact Us</h4>
 
-              <div className="hb-contact-box">
-                <div className="hb-contact-icon">
+              <div className="ff-contact-box">
+                <div className="ff-contact-icon">
                   <i className="bi bi-geo-alt-fill"></i>
                 </div>
                 <div>
                   <h6>Location</h6>
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=51.51167430677527,-0.08720812507322412"
+                    href="https://www.google.com/maps/search/?api=1&query=London%20United%20Kingdom"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -431,8 +566,8 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="hb-contact-box">
-                <div className="hb-contact-icon">
+              <div className="ff-contact-box">
+                <div className="ff-contact-icon">
                   <i className="bi bi-telephone-fill"></i>
                 </div>
                 <div>
@@ -441,8 +576,8 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="hb-contact-box">
-                <div className="hb-contact-icon">
+              <div className="ff-contact-box">
+                <div className="ff-contact-icon">
                   <i className="bi bi-envelope-fill"></i>
                 </div>
                 <div>
@@ -451,8 +586,8 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="hb-contact-box">
-                <div className="hb-contact-icon">
+              <div className="ff-contact-box">
+                <div className="ff-contact-icon">
                   <i className="bi bi-clock-fill"></i>
                 </div>
                 <div>
@@ -461,29 +596,29 @@ const Footer = () => {
                 </div>
               </div>
 
-              <form className="hb-newsletter" onSubmit={handleSubscribe}>
-                <h5>Get Weekly Deals</h5>
-                <p>Subscribe and receive exclusive food offers and combo deals.</p>
+              <form className="ff-newsletter" onSubmit={handleSubscribe}>
+                <h5>Get Hot Deals</h5>
+                <p>Subscribe for weekly offers, combo meals and exclusive discounts.</p>
 
                 <input
                   type="email"
-                  className="hb-newsletter-input"
+                  className="ff-newsletter-input"
                   placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <button type="submit" className="hb-newsletter-btn">
+                <button type="submit" className="ff-newsletter-btn">
                   Subscribe Now
                 </button>
               </form>
             </div>
           </div>
 
-          <div className="hb-bottom">
+          <div className="ff-bottom">
             <p>© 2026 <strong>FAST FOOD</strong>. All Rights Reserved.</p>
 
-            <div className="hb-payments">
+            <div className="ff-payments">
               <span><i className="bi bi-credit-card-fill"></i></span>
               <span><i className="bi bi-paypal"></i></span>
               <span><i className="bi bi-wallet2"></i></span>

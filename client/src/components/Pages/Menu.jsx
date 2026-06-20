@@ -11,80 +11,121 @@ const Menu = () => {
   const [confirmedTotal, setConfirmedTotal] = useState(0);
   const cartRef = useRef(null);
 
-  const categories = ["All", "Burgers", "Pizzas", "Wings", "Fries", "Drinks"];
+  const categories = [
+    { name: "All", icon: "bi bi-grid-fill" },
+    { name: "Fast Food", icon: "bi bi-lightning-charge-fill" },
+    { name: "Chinese", icon: "bi bi-fire" },
+    { name: "Desi", icon: "bi bi-cloud-steam-fill" },
+  ];
 
   const menuItems = [
     {
       id: 1,
-      name: "Inferno Smash",
-      category: "Burgers",
+      name: "Inferno Smash Burger",
+      category: "Fast Food",
       price: 8.99,
       tag: "Best Seller",
       img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&q=90",
-      desc: "Double smashed beef with cheddar and smoky ranch sauce.",
+      desc: "Double smashed beef, melted cheese, crispy onions and signature fire sauce.",
     },
     {
       id: 2,
-      name: "Mega Stack",
-      category: "Burgers",
-      price: 11.99,
-      tag: "Premium",
-      img: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=1200&q=90",
-      desc: "Triple layered burger loaded with cheese and crispy onions.",
-    },
-    {
-      id: 3,
-      name: "Crunch Chicken",
-      category: "Burgers",
-      price: 7.99,
-      tag: "Crispy",
-      img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=1200&q=90",
-      desc: "Southern fried chicken burger with signature mayo.",
-    },
-    {
-      id: 4,
-      name: "Fire House Pizza",
-      category: "Pizzas",
-      price: 14.99,
-      tag: "Hot",
-      img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=90",
-      desc: "Stone baked pizza topped with spicy beef and jalapeños.",
-    },
-    {
-      id: 5,
-      name: "Pepperoni Deluxe",
-      category: "Pizzas",
-      price: 13.99,
-      tag: "Popular",
-      img: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?w=1200&q=90",
-      desc: "Loaded pepperoni slices with extra cheese blend.",
-    },
-    {
-      id: 6,
-      name: "Loaded Ranch Fries",
-      category: "Fries",
+      name: "Loaded Cheesy Fries",
+      category: "Fast Food",
       price: 5.99,
       tag: "Loaded",
       img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=1200&q=90",
-      desc: "Cheese sauce, crispy beef bites and spicy mayo drizzle.",
+      desc: "Golden fries topped with cheese sauce, spicy mayo and crispy chicken bites.",
+    },
+    {
+      id: 3,
+      name: "Fire Pepperoni Pizza",
+      category: "Fast Food",
+      price: 13.99,
+      tag: "Hot",
+      img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=90",
+      desc: "Stone-baked pizza loaded with pepperoni, mozzarella and jalapeños.",
+    },
+    {
+      id: 4,
+      name: "Crispy Chicken Wrap",
+      category: "Fast Food",
+      price: 6.99,
+      tag: "Crispy",
+      img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=1200&q=90",
+      desc: "Crunchy chicken strips wrapped with lettuce, cheese and creamy garlic sauce.",
+    },
+    {
+      id: 5,
+      name: "Chicken Chow Mein",
+      category: "Chinese",
+      price: 9.49,
+      tag: "Popular",
+      img: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=1200&q=90",
+      desc: "Stir-fried noodles with chicken, vegetables and rich oriental seasoning.",
+    },
+    {
+      id: 6,
+      name: "Kung Pao Chicken",
+      category: "Chinese",
+      price: 10.99,
+      tag: "Spicy",
+      img: "https://images.unsplash.com/photo-1525755662778-989d0524087e?w=1200&q=90",
+      desc: "Tender chicken tossed with chilli, peppers, peanuts and sweet-spicy sauce.",
     },
     {
       id: 7,
-      name: "Buffalo Wings",
-      category: "Wings",
+      name: "Egg Fried Rice",
+      category: "Chinese",
       price: 6.99,
-      tag: "Spicy",
-      img: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=1200&q=90",
-      desc: "Juicy wings tossed in our signature buffalo glaze.",
+      tag: "Classic",
+      img: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=1200&q=90",
+      desc: "Fluffy fried rice with egg, spring onion and perfectly balanced seasoning.",
     },
     {
       id: 8,
-      name: "Wild Milkshake",
-      category: "Drinks",
-      price: 4.5,
-      tag: "Sweet",
-      img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=1200&q=90",
-      desc: "Creamy milkshake topped with whipped vanilla cream.",
+      name: "Chicken Manchurian",
+      category: "Chinese",
+      price: 9.99,
+      tag: "Saucy",
+      img: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=1200&q=90",
+      desc: "Crispy chicken balls covered in bold sweet and tangy Manchurian gravy.",
+    },
+    {
+      id: 9,
+      name: "Chicken Biryani",
+      category: "Desi",
+      price: 8.99,
+      tag: "Signature",
+      img: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=1200&q=90",
+      desc: "Aromatic basmati rice cooked with tender chicken and traditional spices.",
+    },
+    {
+      id: 10,
+      name: "Butter Chicken",
+      category: "Desi",
+      price: 11.49,
+      tag: "Creamy",
+      img: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=1200&q=90",
+      desc: "Rich creamy curry with smoky chicken pieces and buttery desi flavour.",
+    },
+    {
+      id: 11,
+      name: "Seekh Kebab Roll",
+      category: "Desi",
+      price: 6.49,
+      tag: "Street Style",
+      img: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=1200&q=90",
+      desc: "Juicy seekh kebab wrapped with chutney, onions and soft paratha.",
+    },
+    {
+      id: 12,
+      name: "Lahori Karahi",
+      category: "Desi",
+      price: 12.99,
+      tag: "Desi Hit",
+      img: "https://images.unsplash.com/photo-1631292784640-2b24be784d5d?w=1200&q=90",
+      desc: "Traditional karahi cooked with tomatoes, green chillies and fresh ginger.",
     },
   ];
 
@@ -94,12 +135,14 @@ const Menu = () => {
       : menuItems.filter((item) => item.category === active);
 
   const scrollToCart = () => {
-    setTimeout(() => {
-      cartRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 150);
+    if (window.innerWidth <= 991) {
+      setTimeout(() => {
+        cartRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 120);
+    }
   };
 
   const addToCart = (item) => {
@@ -172,125 +215,193 @@ const Menu = () => {
           --hb-black: #120707;
           --hb-red: #e50914;
           --hb-red-dark: #8f0008;
+          --hb-orange: #ff5a00;
           --hb-yellow: #ffbf00;
-          --hb-cream: #fff7ed;
-          --hb-soft: #ffe3d3;
-          --hb-muted: #6f4e45;
+          --hb-cream: #fff8ed;
+          --hb-soft: #ffe3c2;
+          --hb-muted: #765040;
         }
 
         .hb-menu {
           min-height: 100vh;
           background:
-            radial-gradient(circle at top left, rgba(229,9,20,.18), transparent 32%),
-            radial-gradient(circle at bottom right, rgba(255,191,0,.18), transparent 30%),
-            linear-gradient(160deg, #fff7ed, #ffe3d3 48%, #fff7ed);
+            radial-gradient(circle at 10% 10%, rgba(255, 191, 0, .35), transparent 24%),
+            radial-gradient(circle at 90% 8%, rgba(229, 9, 20, .22), transparent 28%),
+            radial-gradient(circle at 50% 100%, rgba(255, 90, 0, .22), transparent 34%),
+            linear-gradient(145deg, #fff8ed 0%, #ffe3c2 48%, #fff1dc 100%);
           color: var(--hb-black);
           overflow: hidden;
-          padding: 130px 0 90px;
+          padding: 120px 0 80px;
           position: relative;
           font-family: "Inter", sans-serif;
         }
 
+        .hb-menu::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,.34) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.34) 1px, transparent 1px);
+          background-size: 42px 42px;
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 80%);
+          pointer-events: none;
+        }
+
         .hb-floating-icon {
           position: absolute;
-          right: -40px;
-          top: 100px;
-          font-size: 220px;
-          color: rgba(229,9,20,.1);
+          right: -35px;
+          top: 90px;
+          font-size: 210px;
+          color: rgba(229,9,20,.11);
           animation: floatFire 5s ease-in-out infinite;
+          pointer-events: none;
+        }
+
+        .hb-floating-icon-2 {
+          position: absolute;
+          left: -28px;
+          bottom: 150px;
+          font-size: 170px;
+          color: rgba(255,90,0,.1);
+          animation: floatFire 6s ease-in-out infinite reverse;
           pointer-events: none;
         }
 
         .hb-heading {
           text-align: center;
-          margin-bottom: 60px;
+          margin-bottom: 36px;
+          position: relative;
+          z-index: 2;
         }
 
         .hb-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
           color: var(--hb-red);
+          background: rgba(255,255,255,.72);
+          border: 1px solid rgba(229,9,20,.16);
+          box-shadow: 0 16px 40px rgba(18,7,7,.08);
+          border-radius: 999px;
+          padding: 11px 18px;
           font-size: 12px;
           font-weight: 950;
-          letter-spacing: 4px;
+          letter-spacing: 2px;
           text-transform: uppercase;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
+          backdrop-filter: blur(14px);
         }
 
         .hb-heading h2 {
-          font-size: clamp(46px,7vw,88px);
+          font-size: clamp(44px, 7.2vw, 92px);
           font-weight: 950;
           line-height: .9;
           margin-bottom: 18px;
-          letter-spacing: -2px;
+          letter-spacing: -3px;
         }
 
         .hb-heading h2 span {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark), var(--hb-yellow));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange), var(--hb-yellow));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 
         .hb-heading p {
           color: var(--hb-muted);
-          max-width: 700px;
+          max-width: 760px;
           margin: auto;
-          line-height: 1.9;
+          line-height: 1.85;
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 650;
         }
 
-        .hb-line {
-          width: 100px;
-          height: 5px;
+        .hb-quick-strip {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin: 28px 0 42px;
+        }
+
+        .hb-quick-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 15px;
           border-radius: 999px;
-          margin: 20px auto 0;
-          background: linear-gradient(90deg, var(--hb-red), var(--hb-yellow));
+          background: rgba(255,255,255,.82);
+          color: var(--hb-black);
+          border: 1px solid rgba(229,9,20,.14);
+          box-shadow: 0 12px 30px rgba(18,7,7,.06);
+          font-weight: 900;
+          font-size: 13px;
+        }
+
+        .hb-quick-pill i {
+          color: var(--hb-red);
         }
 
         .hb-filters {
+          position: sticky;
+          top: 78px;
+          z-index: 5;
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
           gap: 14px;
-          margin-bottom: 55px;
+          margin-bottom: 42px;
+          padding: 12px;
+          border-radius: 26px;
+          background: rgba(255,255,255,.62);
+          border: 1px solid rgba(229,9,20,.12);
+          backdrop-filter: blur(18px);
+          box-shadow: 0 18px 50px rgba(18,7,7,.08);
         }
 
         .hb-filter-btn {
           border-radius: 999px !important;
-          padding: 14px 24px !important;
+          padding: 13px 20px !important;
           background: white !important;
           color: var(--hb-black) !important;
-          border: 1px solid rgba(229,9,20,.2) !important;
+          border: 1px solid rgba(229,9,20,.18) !important;
           font-weight: 950 !important;
-          transition: .35s ease;
-          box-shadow: 0 12px 35px rgba(18,7,7,.06);
+          transition: .32s ease;
+          box-shadow: 0 10px 26px rgba(18,7,7,.05);
+          display: inline-flex !important;
+          align-items: center;
+          gap: 9px;
         }
 
         .hb-filter-btn.active,
         .hb-filter-btn:hover {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
-          transform: translateY(-4px);
+          transform: translateY(-3px);
           box-shadow: 0 18px 40px rgba(229,9,20,.25);
         }
 
         .hb-card {
           height: 100%;
-          border-radius: 30px;
+          border-radius: 32px;
           overflow: hidden;
-          background: rgba(255,255,255,.88);
-          border: 1px solid rgba(229,9,20,.16);
-          transition: .4s ease;
+          background: rgba(255,255,255,.9);
+          border: 1px solid rgba(229,9,20,.14);
+          transition: .38s ease;
           box-shadow: 0 24px 65px rgba(18,7,7,.1);
+          position: relative;
         }
 
         .hb-card:hover {
-          transform: translateY(-12px);
-          border-color: rgba(229,9,20,.35);
-          box-shadow: 0 30px 70px rgba(229,9,20,.18);
+          transform: translateY(-10px);
+          border-color: rgba(229,9,20,.38);
+          box-shadow: 0 30px 76px rgba(229,9,20,.18);
         }
 
         .hb-card-img {
-          height: 260px;
+          height: 250px;
           overflow: hidden;
           position: relative;
         }
@@ -300,18 +411,18 @@ const Menu = () => {
           height: 100%;
           object-fit: cover;
           transition: 1s ease;
-          filter: brightness(1.06) contrast(1.08) saturate(1.12);
+          filter: brightness(1.05) contrast(1.08) saturate(1.16);
         }
 
         .hb-card:hover img {
-          transform: scale(1.12);
+          transform: scale(1.12) rotate(1deg);
         }
 
         .hb-card-img::after {
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(18,7,7,.72), rgba(229,9,20,.12), transparent 70%);
+          background: linear-gradient(to top, rgba(18,7,7,.76), rgba(229,9,20,.14), transparent 72%);
         }
 
         .hb-badge {
@@ -320,17 +431,21 @@ const Menu = () => {
           left: 18px;
           z-index: 2;
           border-radius: 999px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-yellow)) !important;
+          background: linear-gradient(135deg, var(--hb-yellow), var(--hb-orange), var(--hb-red)) !important;
           color: white !important;
           font-weight: 950 !important;
           padding: 10px 14px !important;
+          box-shadow: 0 12px 30px rgba(18,7,7,.2);
         }
 
         .hb-content {
-          padding: 28px;
+          padding: 26px;
         }
 
         .hb-category {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
           color: var(--hb-red);
           font-size: 12px;
           letter-spacing: 2px;
@@ -340,38 +455,43 @@ const Menu = () => {
         }
 
         .hb-content h3 {
-          font-size: 30px;
+          font-size: 28px;
           font-weight: 950;
           margin-bottom: 12px;
+          letter-spacing: -1px;
         }
 
         .hb-desc {
           color: var(--hb-muted);
-          line-height: 1.8;
-          margin-bottom: 24px;
+          line-height: 1.75;
+          margin-bottom: 22px;
+          font-weight: 600;
         }
 
         .hb-bottom {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          gap: 14px;
         }
 
         .hb-price {
           color: var(--hb-red);
-          font-size: 36px;
+          font-size: 34px;
           font-weight: 950;
+          letter-spacing: -1px;
         }
 
         .hb-add {
-          width: 56px;
-          height: 56px;
+          min-width: 54px;
+          height: 54px;
           border-radius: 50% !important;
           border: none !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-size: 20px !important;
-          transition: .35s ease;
+          transition: .32s ease;
+          box-shadow: 0 14px 32px rgba(229,9,20,.28);
         }
 
         .hb-add:hover {
@@ -380,14 +500,15 @@ const Menu = () => {
 
         .hb-cart-panel {
           position: sticky;
-          top: 100px;
+          top: 155px;
           border-radius: 34px;
-          padding: 26px;
+          padding: 24px;
           background:
-            linear-gradient(135deg, rgba(255,255,255,.97), rgba(255,227,211,.9));
+            radial-gradient(circle at top right, rgba(255,191,0,.24), transparent 32%),
+            linear-gradient(135deg, rgba(255,255,255,.97), rgba(255,235,210,.94));
           border: 1px solid rgba(229,9,20,.18);
           box-shadow: 0 30px 80px rgba(18,7,7,.13);
-          scroll-margin-top: 100px;
+          scroll-margin-top: 115px;
         }
 
         .hb-cart-head {
@@ -399,27 +520,29 @@ const Menu = () => {
 
         .hb-cart-head h3 {
           margin: 0;
-          font-size: 28px;
+          font-size: 27px;
           font-weight: 950;
         }
 
         .hb-cart-count {
-          min-width: 38px;
-          height: 38px;
+          min-width: 40px;
+          height: 40px;
           border-radius: 50%;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange));
           color: white;
           font-weight: 950;
+          box-shadow: 0 12px 28px rgba(229,9,20,.26);
         }
 
         .hb-empty-cart {
           padding: 34px 18px;
           text-align: center;
           border-radius: 24px;
-          border: 1px dashed rgba(229,9,20,.28);
+          border: 1px dashed rgba(229,9,20,.3);
           color: var(--hb-muted);
+          background: rgba(255,255,255,.55);
         }
 
         .hb-empty-cart i {
@@ -432,15 +555,24 @@ const Menu = () => {
         .hb-cart-list {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 14px;
           max-height: 390px;
           overflow-y: auto;
           padding-right: 4px;
         }
 
+        .hb-cart-list::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .hb-cart-list::-webkit-scrollbar-thumb {
+          background: rgba(229,9,20,.35);
+          border-radius: 999px;
+        }
+
         .hb-cart-item {
           display: grid;
-          grid-template-columns: 58px 1fr auto;
+          grid-template-columns: 56px 1fr auto;
           gap: 12px;
           align-items: center;
           padding: 12px;
@@ -450,20 +582,22 @@ const Menu = () => {
         }
 
         .hb-cart-img {
-          width: 58px;
-          height: 58px;
+          width: 56px;
+          height: 56px;
           border-radius: 16px;
           object-fit: cover;
         }
 
         .hb-cart-name {
-          font-weight: 900;
+          font-weight: 950;
           margin-bottom: 4px;
+          line-height: 1.2;
         }
 
         .hb-cart-small {
           color: var(--hb-muted);
           font-size: 13px;
+          font-weight: 700;
         }
 
         .hb-cart-controls {
@@ -488,7 +622,7 @@ const Menu = () => {
         .hb-qty {
           min-width: 24px;
           text-align: center;
-          font-weight: 900;
+          font-weight: 950;
         }
 
         .hb-remove {
@@ -504,6 +638,7 @@ const Menu = () => {
           font-weight: 950;
           text-align: right;
           white-space: nowrap;
+          margin-top: 10px;
         }
 
         .hb-bill {
@@ -517,6 +652,7 @@ const Menu = () => {
           justify-content: space-between;
           color: var(--hb-muted);
           margin-bottom: 12px;
+          font-weight: 750;
         }
 
         .hb-bill-row.total {
@@ -532,13 +668,10 @@ const Menu = () => {
           border: none !important;
           border-radius: 999px !important;
           padding: 15px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-weight: 950 !important;
-        }
-
-        .hb-checkout:hover {
-          transform: translateY(-3px);
+          box-shadow: 0 16px 34px rgba(229,9,20,.24);
         }
 
         .hb-clear {
@@ -549,25 +682,40 @@ const Menu = () => {
           border: 1px solid rgba(229,9,20,.2) !important;
           background: white !important;
           color: var(--hb-black) !important;
-          font-weight: 850 !important;
+          font-weight: 900 !important;
         }
 
         .hb-cta {
-          margin-top: 90px;
+          margin-top: 80px;
           border-radius: 38px;
-          padding: 70px 50px;
+          padding: 64px 42px;
           text-align: center;
           background:
-            linear-gradient(rgba(143,0,8,.84), rgba(18,7,7,.86)),
+            linear-gradient(rgba(143,0,8,.82), rgba(18,7,7,.88)),
             url("https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1700&q=95") center/cover;
           color: white;
-          box-shadow: 0 35px 100px rgba(18,7,7,.22);
+          box-shadow: 0 35px 100px rgba(18,7,7,.24);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hb-cta::after {
+          content: "";
+          position: absolute;
+          width: 190px;
+          height: 190px;
+          border-radius: 50%;
+          background: rgba(255,191,0,.22);
+          right: -60px;
+          top: -60px;
         }
 
         .hb-cta h2 {
-          font-size: clamp(38px,6vw,72px);
+          position: relative;
+          z-index: 2;
+          font-size: clamp(36px, 6vw, 72px);
           font-weight: 950;
-          line-height: .95;
+          line-height: .96;
           margin-bottom: 18px;
         }
 
@@ -576,11 +724,14 @@ const Menu = () => {
         }
 
         .hb-cta p {
-          color: rgba(255,255,255,.76);
+          position: relative;
+          z-index: 2;
+          color: rgba(255,255,255,.78);
           max-width: 760px;
           margin: auto;
-          line-height: 1.9;
+          line-height: 1.85;
           font-size: 18px;
+          font-weight: 600;
         }
 
         .hb-success-modal .modal-content {
@@ -608,7 +759,7 @@ const Menu = () => {
           border-radius: 50%;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange));
           color: white;
           font-size: 44px;
           box-shadow: 0 20px 52px rgba(229,9,20,.34);
@@ -648,7 +799,7 @@ const Menu = () => {
           border: none !important;
           border-radius: 999px !important;
           padding: 14px 24px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-weight: 950 !important;
         }
@@ -664,64 +815,201 @@ const Menu = () => {
         }
 
         @media(max-width: 991px) {
+          .hb-menu {
+            padding: 105px 0 70px;
+          }
+
+          .hb-filters {
+            position: relative;
+            top: auto;
+          }
+
           .hb-cart-panel {
             position: relative;
             top: auto;
-            margin-top: 28px;
+            margin-top: 30px;
           }
         }
 
         @media(max-width: 768px) {
           .hb-menu {
-            padding: 110px 0 70px;
+            padding: 92px 0 58px;
           }
 
-          .hb-card-img {
-            height: 220px;
-          }
-
-          .hb-cta {
-            padding: 55px 24px;
+          .hb-heading {
+            margin-bottom: 25px;
           }
 
           .hb-heading h2 {
             line-height: 1;
+            letter-spacing: -2px;
+          }
+
+          .hb-heading p {
+            font-size: 15px;
+            line-height: 1.7;
+            padding: 0 6px;
+          }
+
+          .hb-quick-strip {
+            justify-content: flex-start;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 8px;
+            margin-bottom: 28px;
+          }
+
+          .hb-quick-pill {
+            flex: 0 0 auto;
+          }
+
+          .hb-filters {
+            justify-content: flex-start;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding: 10px;
+            border-radius: 22px;
+            margin-bottom: 28px;
+          }
+
+          .hb-filter-btn {
+            flex: 0 0 auto;
+            padding: 12px 16px !important;
+            font-size: 14px !important;
+          }
+
+          .hb-card {
+            border-radius: 26px;
+          }
+
+          .hb-card-img {
+            height: 215px;
+          }
+
+          .hb-content {
+            padding: 22px;
+          }
+
+          .hb-content h3 {
+            font-size: 24px;
+          }
+
+          .hb-desc {
+            font-size: 14px;
+            line-height: 1.65;
+          }
+
+          .hb-price {
+            font-size: 28px;
+          }
+
+          .hb-add {
+            min-width: 50px;
+            height: 50px;
+          }
+
+          .hb-cart-panel {
+            border-radius: 28px;
+            padding: 20px;
+          }
+
+          .hb-cart-item {
+            grid-template-columns: 52px 1fr;
+          }
+
+          .hb-cart-price {
+            text-align: left;
+          }
+
+          .hb-cart-item > div:last-child {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .hb-cta {
+            margin-top: 55px;
+            padding: 46px 22px;
+            border-radius: 28px;
           }
 
           .hb-floating-icon {
-            font-size: 150px;
-            right: -45px;
+            font-size: 130px;
+            right: -42px;
+            top: 70px;
+          }
+
+          .hb-floating-icon-2 {
+            display: none;
+          }
+        }
+
+        @media(max-width: 420px) {
+          .hb-eyebrow {
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            padding: 10px 14px;
+          }
+
+          .hb-heading h2 {
+            font-size: 42px;
+          }
+
+          .hb-card-img {
+            height: 200px;
+          }
+
+          .hb-cart-head h3 {
+            font-size: 24px;
           }
         }
       `}</style>
 
       <main className="hb-menu">
         <i className="bi bi-fire hb-floating-icon"></i>
+        <i className="bi bi-cloud-steam-fill hb-floating-icon-2"></i>
 
         <Container>
           <div className="hb-heading">
-            <div className="hb-eyebrow">Freshly Crafted • Premium Taste</div>
+            <div className="hb-eyebrow">
+              <i className="bi bi-stars"></i>
+              Fast Food • Chinese • Desi
+            </div>
 
             <h2>
-              Our <span>Full Menu</span>
+              Crazy <span>Food Menu</span>
             </h2>
 
             <p>
-              Premium ingredients, bold flavours and unforgettable meals made
-              fresh every day.
+              Burgers, pizzas, noodles, fried rice, biryani, karahi and spicy
+              street-style favourites — all in one bold, modern food menu.
             </p>
+          </div>
 
-            <div className="hb-line"></div>
+          <div className="hb-quick-strip">
+            <span className="hb-quick-pill">
+              <i className="bi bi-lightning-charge-fill"></i> Fresh & Hot
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-bag-check-fill"></i> Easy Cart
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-truck"></i> Delivery Ready
+            </span>
           </div>
 
           <div className="hb-filters">
             {categories.map((cat) => (
               <Button
-                key={cat}
-                className={`hb-filter-btn ${active === cat ? "active" : ""}`}
-                onClick={() => setActive(cat)}
+                key={cat.name}
+                className={`hb-filter-btn ${
+                  active === cat.name ? "active" : ""
+                }`}
+                onClick={() => setActive(cat.name)}
               >
-                {cat}
+                <i className={cat.icon}></i>
+                {cat.name}
               </Button>
             ))}
           </div>
@@ -738,7 +1026,19 @@ const Menu = () => {
                       </div>
 
                       <div className="hb-content">
-                        <div className="hb-category">{item.category}</div>
+                        <div className="hb-category">
+                          <i
+                            className={
+                              item.category === "Desi"
+                                ? "bi bi-cloud-steam-fill"
+                                : item.category === "Chinese"
+                                ? "bi bi-fire"
+                                : "bi bi-lightning-charge-fill"
+                            }
+                          ></i>
+                          {item.category}
+                        </div>
+
                         <h3>{item.name}</h3>
                         <p className="hb-desc">{item.desc}</p>
 
@@ -750,6 +1050,7 @@ const Menu = () => {
                           <Button
                             className="hb-add"
                             onClick={() => addToCart(item)}
+                            aria-label={`Add ${item.name} to cart`}
                           >
                             <i className="bi bi-plus-lg"></i>
                           </Button>
@@ -770,10 +1071,10 @@ const Menu = () => {
 
                 {cart.length === 0 ? (
                   <div className="hb-empty-cart">
-                    <i className="bi bi-bag"></i>
+                    <i className="bi bi-bag-heart-fill"></i>
                     <strong>No items added yet</strong>
                     <p className="mb-0 mt-2">
-                      Click plus button to add your favourite meals.
+                      Tap the plus button and build your perfect order.
                     </p>
                   </div>
                 ) : (
@@ -862,12 +1163,12 @@ const Menu = () => {
           <div className="hb-cta">
             <h2>
               Hungry Already?
-              <span> Order Now.</span>
+              <span> Build Your Box.</span>
             </h2>
 
             <p>
-              Add your favourite burgers, pizzas, wings, drinks and loaded fries
-              to the cart and check your total bill instantly.
+              Pick from fast food, Chinese and desi favourites. Add items to the
+              cart and check your total instantly.
             </p>
           </div>
         </Container>

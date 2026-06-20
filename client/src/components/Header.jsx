@@ -13,9 +13,10 @@ const Header = () => {
   const LOGO = "/Images/Logo.png";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 35);
+    const handleScroll = () => setScrolled(window.scrollY > 28);
     window.addEventListener("scroll", handleScroll);
     handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -35,366 +36,454 @@ const Header = () => {
   return (
     <>
       <style>{`
-        :root{
-          --hb-black:#120707;
-          --hb-red:#e50914;
-          --hb-red-dark:#8f0008;
-          --hb-yellow:#ffbf00;
-          --hb-cream:#fff7ed;
-          --hb-soft:#ffe3d3;
+        :root {
+          --rs-ink:#130606;
+          --rs-coffee:#ef233c;
+          --rs-caramel:#ff7a00;
+          --rs-gold:#ffc300;
+          --rs-cream:#fff6e8;
+          --rs-milk:#fffdf8;
+          --rs-mint:#19a974;
+          --rs-border:rgba(239,35,60,.14);
         }
 
-        .hb-navbar{
-          width:100%;
+        .rs-navbar {
           position:fixed !important;
           top:0;
           left:0;
+          width:100%;
           z-index:9999;
           padding:12px 0;
-          transition:.35s ease;
-          background:rgba(255,247,237,.84);
-          backdrop-filter:blur(16px);
-          border-bottom:1px solid rgba(229,9,20,.08);
+          background:
+            radial-gradient(circle at 12% 20%, rgba(255,195,0,.22), transparent 30%),
+            radial-gradient(circle at 86% 10%, rgba(239,35,60,.18), transparent 28%),
+            rgba(255,246,232,.94);
+          backdrop-filter:blur(18px);
+          -webkit-backdrop-filter:blur(18px);
+          border-bottom:1px solid var(--rs-border);
+          transition:.32s ease;
         }
 
-        .hb-navbar.scrolled{
-          padding:8px 0;
-          background:rgba(255,247,237,.97);
-          border-bottom:1px solid rgba(229,9,20,.16);
-          box-shadow:0 18px 45px rgba(18,7,7,.12);
+        .rs-navbar.scrolled {
+          padding:7px 0;
+          background:rgba(255,246,232,.98);
+          box-shadow:0 16px 45px rgba(239,35,60,.14);
         }
 
-        .hb-nav-wrap{
+        .rs-wrap {
           width:100%;
           display:flex;
           align-items:center;
           justify-content:space-between;
-          gap:14px;
+          gap:16px;
         }
 
-        .hb-brand{
+        .rs-brand {
           display:flex;
           align-items:center;
           gap:12px;
           text-decoration:none;
-          color:var(--hb-black) !important;
-          font-size:clamp(20px,2.1vw,30px);
-          font-weight:950;
-          letter-spacing:-1px;
+          color:var(--rs-ink) !important;
+          min-width:0;
+        }
+
+        .rs-logo {
+          width:64px;
+          height:64px;
+          min-width:64px;
+          object-fit:contain;
+          display:block;
+          filter:drop-shadow(0 14px 24px rgba(239,35,60,.30));
+          transition:.3s ease;
+        }
+
+        .rs-navbar.scrolled .rs-logo {
+          width:54px;
+          height:54px;
+          min-width:54px;
+        }
+
+        .rs-brand-name {
+          display:flex;
+          flex-direction:column;
+          line-height:.95;
+          min-width:0;
+        }
+
+        .rs-title {
+          font-size:clamp(21px,2vw,30px);
+          font-weight:1000;
+          letter-spacing:-.9px;
+          text-transform:uppercase;
           white-space:nowrap;
         }
 
-        .hb-brand span{
-          background:linear-gradient(135deg,var(--hb-red),var(--hb-red-dark),var(--hb-yellow));
+        .rs-title span {
+          background:linear-gradient(135deg,var(--rs-coffee),var(--rs-caramel),var(--rs-gold));
           -webkit-background-clip:text;
           -webkit-text-fill-color:transparent;
         }
 
-        .hb-logo-img{
-          width:70px;
-          height:70px;
-          min-width:70px;
-          object-fit:contain;
-          display:block;
-          filter:drop-shadow(0 14px 25px rgba(229,9,20,.25));
-          transition:.3s ease;
+        .rs-subtitle {
+          margin-top:5px;
+          color:rgba(19,6,6,.62);
+          font-size:10px;
+          font-weight:900;
+          letter-spacing:1.1px;
+          text-transform:uppercase;
+          white-space:nowrap;
         }
 
-        .hb-navbar.scrolled .hb-logo-img{
-          width:58px;
-          height:58px;
-          min-width:58px;
-        }
-
-        .hb-brand:hover .hb-logo-img{
-          transform:scale(1.05);
-        }
-
-        .hb-brand-text{
-          display:flex;
-          align-items:center;
-          line-height:1;
-        }
-
-        .hb-desktop-area{
+        .rs-desktop {
           display:flex;
           align-items:center;
           justify-content:flex-end;
-          gap:12px;
+          gap:10px;
           min-width:0;
         }
 
-        .hb-nav{
+        .rs-nav {
           display:flex;
           align-items:center;
           gap:4px;
-          padding:8px;
+          padding:7px;
           border-radius:999px;
-          background:rgba(255,255,255,.74);
-          border:1px solid rgba(229,9,20,.14);
-          backdrop-filter:blur(18px);
-          box-shadow:0 14px 38px rgba(18,7,7,.06);
+          background:rgba(255,255,255,.76);
+          border:1px solid rgba(239,35,60,.13);
+          box-shadow:0 12px 32px rgba(239,35,60,.07);
         }
 
-        .hb-nav-link{
-          position:relative;
+        .rs-link {
           text-decoration:none;
-          color:var(--hb-black) !important;
+          color:var(--rs-ink) !important;
           padding:10px 12px !important;
           border-radius:999px;
-          font-size:12px;
-          font-weight:950;
+          font-size:11px;
+          font-weight:1000;
+          letter-spacing:.5px;
+          text-transform:uppercase;
+          transition:.25s ease;
+          white-space:nowrap;
+        }
+
+        .rs-link:hover,
+        .rs-link.active {
+          color:#fff !important;
+          background:linear-gradient(135deg,var(--rs-coffee),var(--rs-caramel),var(--rs-gold));
+          box-shadow:0 10px 24px rgba(239,35,60,.24);
+        }
+
+        .rs-badge {
+          border:0 !important;
+          border-radius:999px !important;
+          padding:8px 12px !important;
+          color:#fff !important;
+          background:linear-gradient(135deg,var(--rs-coffee),var(--rs-caramel)) !important;
+          font-size:10px;
+          font-weight:1000 !important;
           letter-spacing:.6px;
           text-transform:uppercase;
-          transition:.3s ease;
           white-space:nowrap;
+          box-shadow:0 12px 28px rgba(239,35,60,.22);
         }
 
-        .hb-nav-link:hover,
-        .hb-nav-link.active{
-          color:var(--hb-red) !important;
-          background:linear-gradient(135deg,rgba(229,9,20,.12),rgba(255,191,0,.18));
-        }
-
-        .hb-hot-badge{
-          border:none !important;
-          background:linear-gradient(135deg,var(--hb-red),var(--hb-red-dark)) !important;
-          color:white !important;
-          font-size:10px;
-          letter-spacing:.7px;
-          padding:8px 12px !important;
+        .rs-order {
+          border:0 !important;
           border-radius:999px !important;
-          font-weight:950 !important;
-          box-shadow:0 12px 30px rgba(229,9,20,.24);
-          white-space:nowrap;
-        }
-
-        .hb-order-btn{
-          border:none !important;
-          border-radius:999px !important;
-          padding:12px 22px !important;
-          background:linear-gradient(135deg,var(--hb-red),var(--hb-red-dark)) !important;
-          color:white !important;
-          font-weight:950 !important;
-          display:inline-flex;
+          padding:12px 21px !important;
+          background:linear-gradient(135deg,var(--rs-coffee),#a80015,var(--rs-caramel),var(--rs-gold)) !important;
+          color:#fff !important;
+          font-weight:1000 !important;
+          display:inline-flex !important;
           align-items:center;
           justify-content:center;
           gap:9px;
-          transition:.3s ease;
-          box-shadow:0 18px 42px rgba(229,9,20,.25);
+          box-shadow:0 16px 38px rgba(239,35,60,.30);
+          transition:.28s ease;
           white-space:nowrap;
         }
 
-        .hb-order-btn:hover{
+        .rs-order:hover {
           transform:translateY(-3px) scale(1.03);
         }
 
-        .hb-toggle{
-          width:48px;
-          height:48px;
-          min-width:48px;
+        .rs-toggle {
+          width:46px;
+          height:46px;
+          min-width:46px;
           border-radius:16px !important;
-          border:1px solid rgba(229,9,20,.18) !important;
-          background:white !important;
+          border:1px solid rgba(239,35,60,.16) !important;
+          background:#fff !important;
+          color:var(--rs-coffee) !important;
           display:grid;
           place-items:center;
-          color:var(--hb-red) !important;
           font-size:27px;
-          box-shadow:0 14px 35px rgba(18,7,7,.08) !important;
+          box-shadow:0 12px 32px rgba(239,35,60,.10);
           padding:0 !important;
         }
 
-        .hb-toggle:focus{
-          box-shadow:0 14px 35px rgba(18,7,7,.08) !important;
+        .rs-toggle:focus {
+          outline:none !important;
+          box-shadow:0 12px 32px rgba(239,35,60,.10) !important;
         }
 
-        .hb-offcanvas{
-          width:min(390px,88vw) !important;
+        .rs-offcanvas {
+          width:min(410px,90vw) !important;
           background:
-            radial-gradient(circle at top left, rgba(229,9,20,.18), transparent 32%),
-            radial-gradient(circle at bottom right, rgba(255,191,0,.18), transparent 30%),
-            linear-gradient(160deg,#fff7ed,#ffe3d3);
-          border-left:1px solid rgba(229,9,20,.16);
+            radial-gradient(circle at top left, rgba(255,195,0,.30), transparent 32%),
+            radial-gradient(circle at top right, rgba(239,35,60,.22), transparent 34%),
+            radial-gradient(circle at bottom right, rgba(255,122,0,.18), transparent 32%),
+            linear-gradient(160deg,#fff6e8,#ffe1c4);
+          border-left:1px solid rgba(239,35,60,.14);
         }
 
-        .hb-offcanvas .offcanvas-header{
-          border-bottom:1px solid rgba(229,9,20,.14);
-          padding:20px;
+        .rs-offcanvas .offcanvas-header {
+          padding:18px;
+          border-bottom:1px solid rgba(239,35,60,.13);
         }
 
-        .hb-offcanvas .btn-close{
+        .rs-offcanvas .btn-close {
           opacity:1;
           box-shadow:none !important;
         }
 
-        .hb-mobile-nav{
+        .rs-mobile-card {
+          margin:16px 0 18px;
+          padding:20px;
+          border-radius:26px;
+          color:#fff;
+          background:
+            linear-gradient(135deg,rgba(239,35,60,.92),rgba(255,122,0,.86),rgba(255,195,0,.68)),
+            url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=90");
+          background-size:cover;
+          background-position:center;
+          box-shadow:0 20px 45px rgba(239,35,60,.24);
+        }
+
+        .rs-mobile-card h3 {
+          font-size:24px;
+          font-weight:1000;
+          margin:0 0 6px;
+          line-height:1.1;
+        }
+
+        .rs-mobile-card p {
+          margin:0;
+          font-size:13px;
+          font-weight:700;
+          opacity:.94;
+          line-height:1.5;
+        }
+
+        .rs-pills {
+          display:flex;
+          flex-wrap:wrap;
+          gap:8px;
           margin-top:18px;
+        }
+
+        .rs-pills span {
+          padding:8px 12px;
+          border-radius:999px;
+          background:#fff;
+          color:var(--rs-ink);
+          font-size:12px;
+          font-weight:1000;
+          box-shadow:0 8px 20px rgba(239,35,60,.08);
+        }
+
+        .rs-mobile-nav {
           display:flex;
           flex-direction:column;
           gap:10px;
         }
 
-        .hb-mobile-nav .hb-nav-link{
-          font-size:20px;
-          border-radius:20px;
-          padding:16px 18px !important;
-          border:1px solid rgba(229,9,20,.1);
-          background:rgba(255,255,255,.6);
+        .rs-mobile-nav .rs-link {
           width:100%;
+          font-size:17px;
+          padding:15px 17px !important;
+          border-radius:20px;
+          background:rgba(255,255,255,.76);
+          border:1px solid rgba(239,35,60,.11);
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
         }
 
-        .hb-mobile-order{
+        .rs-mobile-nav .rs-link::after {
+          content:"›";
+          font-size:24px;
+          line-height:1;
+          color:var(--rs-coffee);
+        }
+
+        .rs-mobile-order {
           width:100%;
           min-height:58px;
-          margin-top:24px;
+          margin-top:22px;
+          font-size:16px !important;
         }
 
-        @media(max-width:1199px){
-          .hb-brand{
-            font-size:24px;
-          }
-
-          .hb-logo-img{
-            width:62px;
-            height:62px;
-            min-width:62px;
-          }
-
-          .hb-nav-link{
-            padding:9px 9px !important;
-            font-size:11px;
-          }
-
-          .hb-order-btn{
-            padding:11px 17px !important;
-          }
-
-          .hb-hot-badge{
+        @media(max-width:1199px) {
+          .rs-badge {
             display:none !important;
           }
-        }
 
-        @media(max-width:991px){
-          .hb-navbar{
-            padding:9px 0;
-            background:rgba(255,247,237,.96);
-            box-shadow:0 16px 40px rgba(18,7,7,.08);
+          .rs-link {
+            padding:9px 9px !important;
+            font-size:10px;
           }
 
-          .hb-desktop-area{
+          .rs-order {
+            padding:11px 16px !important;
+          }
+        }
+
+        @media(max-width:991px) {
+          .rs-desktop {
             display:none;
           }
 
-          .hb-logo-img{
-            width:60px;
-            height:60px;
-            min-width:60px;
+          .rs-navbar {
+            padding:8px 0;
+          }
+
+          .rs-logo {
+            width:58px;
+            height:58px;
+            min-width:58px;
           }
         }
 
-        @media(max-width:575px){
-          .hb-navbar{
-            padding:7px 0;
+        @media(max-width:575px) {
+          .rs-wrap {
+            gap:10px;
           }
 
-          .hb-brand{
-            font-size:19px;
+          .rs-brand {
             gap:8px;
-            max-width:calc(100vw - 95px);
+            max-width:calc(100vw - 88px);
+          }
+
+          .rs-logo {
+            width:50px;
+            height:50px;
+            min-width:50px;
+          }
+
+          .rs-title {
+            font-size:19px;
+            letter-spacing:-.5px;
+          }
+
+          .rs-subtitle {
+            font-size:8px;
+            letter-spacing:.7px;
+            max-width:180px;
             overflow:hidden;
+            text-overflow:ellipsis;
           }
 
-          .hb-logo-img{
-            width:52px;
-            height:52px;
-            min-width:52px;
-          }
-
-          .hb-toggle{
+          .rs-toggle {
             width:43px;
             height:43px;
             min-width:43px;
             border-radius:14px !important;
             font-size:24px;
           }
-
-          .hb-mobile-nav .hb-nav-link{
-            font-size:18px;
-          }
         }
 
-        @media(max-width:360px){
-          .hb-brand{
+        @media(max-width:360px) {
+          .rs-title {
             font-size:17px;
           }
 
-          .hb-logo-img{
-            width:48px;
-            height:48px;
-            min-width:48px;
+          .rs-subtitle {
+            display:none;
+          }
+
+          .rs-logo {
+            width:46px;
+            height:46px;
+            min-width:46px;
           }
         }
       `}</style>
 
-      <Navbar fixed="top" expand="lg" className={`hb-navbar ${scrolled ? "scrolled" : ""}`}>
+      <Navbar fixed="top" expand="lg" className={`rs-navbar ${scrolled ? "scrolled" : ""}`}>
         <Container>
-          <div className="hb-nav-wrap">
-            <Navbar.Brand
-              as={NavLink}
-              to="/"
-              className="hb-brand"
-              onClick={() => setShow(false)}
-            >
-              <img src={LOGO} alt="Fast Food Logo" className="hb-logo-img" />
-              <div className="hb-brand-text">
-                FAST<span>FOOD</span>
+          <div className="rs-wrap">
+            <Navbar.Brand as={NavLink} to="/" className="rs-brand" onClick={() => setShow(false)}>
+              <img src={LOGO} alt="Fast Food Logo" className="rs-logo" />
+
+              <div className="rs-brand-name">
+                <div className="rs-title">
+                  FAST <span>FOOD</span>
+                </div>
+                <div className="rs-subtitle">Chinese • Desi • Burgers</div>
               </div>
             </Navbar.Brand>
 
-            <div className="hb-desktop-area">
-              <Nav className="hb-nav">
+            <div className="rs-desktop">
+              <Nav className="rs-nav">
                 {links.map((link) => (
-                  <NavLink key={link.path} to={link.path} className="hb-nav-link">
+                  <NavLink key={link.path} to={link.path} className="rs-link">
                     {link.name}
                   </NavLink>
                 ))}
               </Nav>
 
-              <Badge className="hb-hot-badge">🔥 Fresh & Hot</Badge>
+              <Badge className="rs-badge">Chef’s Pick</Badge>
 
-              <Button className="hb-order-btn" onClick={goToMenu}>
-                <i className="bi bi-bag-fill"></i>
+              <Button className="rs-order" onClick={goToMenu}>
+                <i className="bi bi-bag-heart-fill"></i>
                 Order Now
               </Button>
             </div>
 
-            <button className="hb-toggle d-lg-none" type="button" onClick={() => setShow(true)}>
+            <button
+              className="rs-toggle d-lg-none"
+              type="button"
+              onClick={() => setShow(true)}
+              aria-label="Open menu"
+            >
               <i className="bi bi-list"></i>
             </button>
           </div>
 
-          <Offcanvas
-            show={show}
-            onHide={() => setShow(false)}
-            placement="end"
-            className="hb-offcanvas"
-          >
+          <Offcanvas show={show} onHide={() => setShow(false)} placement="end" className="rs-offcanvas">
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title className="hb-brand">
-                <img src={LOGO} alt="Fast Food Logo" className="hb-logo-img" />
-                <div className="hb-brand-text">
-                  FAST<span>FOOD</span>
+              <Offcanvas.Title className="rs-brand">
+                <img src={LOGO} alt="Fast Food Logo" className="rs-logo" />
+
+                <div className="rs-brand-name">
+                  <div className="rs-title">
+                    FAST <span>FOOD</span>
+                  </div>
+                  <div className="rs-subtitle">Fresh • Premium • Hot</div>
                 </div>
               </Offcanvas.Title>
             </Offcanvas.Header>
 
             <Offcanvas.Body>
-              <Nav className="hb-mobile-nav">
+              <div className="rs-mobile-card">
+                <h3>Premium Food Vibes 🍜🍛</h3>
+                <p>Chinese, Desi, Momos, Burgers & hot fresh meals.</p>
+
+                <div className="rs-pills">
+                  <span>🍜 Chinese</span>
+                  <span>🥟 Momos</span>
+                  <span>🍛 Desi</span>
+                  <span>🍔 Burgers</span>
+                </div>
+              </div>
+
+              <Nav className="rs-mobile-nav">
                 {links.map((link) => (
                   <NavLink
                     key={link.path}
                     to={link.path}
-                    className="hb-nav-link"
+                    className="rs-link"
                     onClick={() => setShow(false)}
                   >
                     {link.name}
@@ -402,9 +491,9 @@ const Header = () => {
                 ))}
               </Nav>
 
-              <Button className="hb-order-btn hb-mobile-order" onClick={goToMenu}>
-                <i className="bi bi-bag-fill"></i>
-                Order Now
+              <Button className="rs-order rs-mobile-order" onClick={goToMenu}>
+                <i className="bi bi-bag-heart-fill"></i>
+                Order Fresh Food
               </Button>
             </Offcanvas.Body>
           </Offcanvas>

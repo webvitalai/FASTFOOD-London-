@@ -1,12 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Badge,
-  Modal,
-} from "react-bootstrap";
+import { Container, Row, Col, Button, Badge, Modal } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -20,40 +13,55 @@ const Deals = () => {
   const deals = [
     {
       id: 1,
-      title: "Wild Fire Deal",
+      title: "Fast Food Fire Box",
+      category: "Fast Food",
       tag: "Best Value",
-      price: 12.99,
-      old: 19.5,
-      img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=1200&q=90",
-      items: ["2x Smash Burgers", "Loaded Fries", "2x Soft Drinks"],
+      price: 14.99,
+      old: 22.5,
+      img: "https://images.unsplash.com/photo-1561758033-7e924f619b47?w=1200&q=90",
+      items: ["2x Smash Burgers", "Loaded Fries", "6pc Wings", "2x Drinks"],
     },
     {
       id: 2,
-      title: "Happiness Combo",
-      tag: "Limited",
-      price: 16.99,
-      old: 24.0,
-      img: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=1200&q=90",
-      items: ["2x Signature Meals", "6pc Hot Wings", "2x Milkshakes"],
+      title: "Chinese Wok Combo",
+      category: "Chinese",
+      tag: "Hot Pick",
+      price: 17.99,
+      old: 26.0,
+      img: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=1200&q=90",
+      items: ["Chicken Chow Mein", "Egg Fried Rice", "Manchurian", "2x Drinks"],
     },
     {
       id: 3,
-      title: "Family Feast Box",
+      title: "Desi Feast Deal",
+      category: "Desi",
       tag: "Mega Deal",
-      price: 28.99,
-      old: 40.0,
-      img: "https://images.unsplash.com/photo-1561758033-7e924f619b47?w=1200&q=90",
-      items: ["4x Burgers", "Large Fries", "Onion Rings", "4x Drinks"],
+      price: 21.99,
+      old: 32.0,
+      img: "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=1200&q=90",
+      items: ["Chicken Biryani", "Seekh Kebab", "Butter Chicken", "2x Naans"],
+    },
+    {
+      id: 4,
+      title: "Family Crazy Box",
+      category: "Mixed",
+      tag: "Family Deal",
+      price: 34.99,
+      old: 49.99,
+      img: "https://images.unsplash.com/photo-1543353071-873f17a7a088?w=1200&q=90",
+      items: ["2x Burgers", "Chow Mein", "Biryani", "Large Fries", "4x Drinks"],
     },
   ];
 
   const scrollToCart = () => {
-    setTimeout(() => {
-      cartRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 150);
+    if (window.innerWidth <= 991) {
+      setTimeout(() => {
+        cartRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 120);
+    }
   };
 
   const addToCart = (deal) => {
@@ -119,6 +127,13 @@ const Deals = () => {
     setCart([]);
   };
 
+  const getCategoryIcon = (category) => {
+    if (category === "Chinese") return "bi bi-fire";
+    if (category === "Desi") return "bi bi-cloud-steam-fill";
+    if (category === "Mixed") return "bi bi-stars";
+    return "bi bi-lightning-charge-fill";
+  };
+
   return (
     <>
       <style>{`
@@ -126,99 +141,154 @@ const Deals = () => {
           --hb-black: #120707;
           --hb-red: #e50914;
           --hb-red-dark: #8f0008;
+          --hb-orange: #ff5a00;
           --hb-yellow: #ffbf00;
-          --hb-cream: #fff7ed;
-          --hb-soft: #ffe3d3;
-          --hb-muted: #6f4e45;
+          --hb-cream: #fff8ed;
+          --hb-soft: #ffe3c2;
+          --hb-muted: #765040;
         }
 
         .hb-deals {
           min-height: 100vh;
-          padding: 130px 0 90px;
+          padding: 120px 0 80px;
           overflow: hidden;
           position: relative;
           background:
-            radial-gradient(circle at top left, rgba(229,9,20,.2), transparent 32%),
-            radial-gradient(circle at bottom right, rgba(255,191,0,.18), transparent 30%),
-            linear-gradient(160deg, #fff7ed, #ffe3d3 48%, #fff7ed);
+            radial-gradient(circle at 10% 10%, rgba(255,191,0,.35), transparent 24%),
+            radial-gradient(circle at 90% 8%, rgba(229,9,20,.22), transparent 28%),
+            radial-gradient(circle at 50% 100%, rgba(255,90,0,.22), transparent 34%),
+            linear-gradient(145deg, #fff8ed 0%, #ffe3c2 48%, #fff1dc 100%);
           color: var(--hb-black);
           font-family: "Inter", sans-serif;
+        }
+
+        .hb-deals::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,.34) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.34) 1px, transparent 1px);
+          background-size: 42px 42px;
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 82%);
+          pointer-events: none;
         }
 
         .hb-floating-fire {
           position: absolute;
           top: 80px;
-          right: -60px;
-          font-size: 260px;
+          right: -58px;
+          font-size: 245px;
           color: rgba(229,9,20,.11);
           animation: floatFire 5s ease-in-out infinite;
           pointer-events: none;
         }
 
+        .hb-floating-steam {
+          position: absolute;
+          left: -35px;
+          bottom: 170px;
+          font-size: 180px;
+          color: rgba(255,90,0,.1);
+          animation: floatFire 6s ease-in-out infinite reverse;
+          pointer-events: none;
+        }
+
         .hb-heading {
           text-align: center;
-          margin-bottom: 70px;
+          margin-bottom: 52px;
+          position: relative;
+          z-index: 2;
         }
 
         .hb-eyebrow {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
           color: var(--hb-red);
-          text-transform: uppercase;
-          letter-spacing: 4px;
+          background: rgba(255,255,255,.72);
+          border: 1px solid rgba(229,9,20,.16);
+          box-shadow: 0 16px 40px rgba(18,7,7,.08);
+          border-radius: 999px;
+          padding: 11px 18px;
           font-size: 12px;
           font-weight: 950;
-          margin-bottom: 16px;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          margin-bottom: 18px;
+          backdrop-filter: blur(14px);
         }
 
         .hb-heading h2 {
-          font-size: clamp(48px,7vw,92px);
+          font-size: clamp(44px, 7.2vw, 92px);
           line-height: .9;
           font-weight: 950;
           margin-bottom: 18px;
-          letter-spacing: -2px;
+          letter-spacing: -3px;
         }
 
         .hb-heading h2 span {
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark), var(--hb-yellow));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange), var(--hb-yellow));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
 
         .hb-heading p {
           color: var(--hb-muted);
-          max-width: 720px;
+          max-width: 760px;
           margin: auto;
-          line-height: 1.9;
+          line-height: 1.85;
           font-size: 18px;
-          font-weight: 600;
+          font-weight: 650;
         }
 
-        .hb-line {
-          width: 100px;
-          height: 5px;
+        .hb-quick-strip {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin: -20px 0 42px;
+        }
+
+        .hb-quick-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 15px;
           border-radius: 999px;
-          margin: 22px auto 0;
-          background: linear-gradient(90deg, var(--hb-red), var(--hb-yellow));
+          background: rgba(255,255,255,.82);
+          color: var(--hb-black);
+          border: 1px solid rgba(229,9,20,.14);
+          box-shadow: 0 12px 30px rgba(18,7,7,.06);
+          font-weight: 900;
+          font-size: 13px;
+        }
+
+        .hb-quick-pill i {
+          color: var(--hb-red);
         }
 
         .hb-deal-card {
           position: relative;
           overflow: hidden;
           border-radius: 34px;
-          background: rgba(255,255,255,.88);
-          border: 1px solid rgba(229,9,20,.18);
+          background: rgba(255,255,255,.9);
+          border: 1px solid rgba(229,9,20,.15);
           height: 100%;
-          transition: .45s ease;
-          box-shadow: 0 28px 75px rgba(18,7,7,.12);
+          transition: .38s ease;
+          box-shadow: 0 24px 65px rgba(18,7,7,.1);
         }
 
         .hb-deal-card:hover {
-          transform: translateY(-14px);
-          border-color: rgba(229,9,20,.36);
-          box-shadow: 0 40px 100px rgba(229,9,20,.18);
+          transform: translateY(-10px);
+          border-color: rgba(229,9,20,.38);
+          box-shadow: 0 30px 76px rgba(229,9,20,.18);
         }
 
         .hb-img-wrap {
-          height: 280px;
+          height: 255px;
           position: relative;
           overflow: hidden;
         }
@@ -228,46 +298,65 @@ const Deals = () => {
           height: 100%;
           object-fit: cover;
           transition: 1s ease;
-          filter: brightness(1.06) contrast(1.08) saturate(1.12);
+          filter: brightness(1.05) contrast(1.08) saturate(1.16);
         }
 
         .hb-deal-card:hover img {
-          transform: scale(1.12);
+          transform: scale(1.12) rotate(1deg);
         }
 
         .hb-img-wrap::after {
           content: "";
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(18,7,7,.76), rgba(229,9,20,.16), transparent 70%);
+          background: linear-gradient(to top, rgba(18,7,7,.76), rgba(229,9,20,.14), transparent 72%);
         }
 
         .hb-badge {
           position: absolute !important;
-          top: 20px;
-          left: 20px;
+          top: 18px;
+          left: 18px;
           z-index: 2;
           border-radius: 999px !important;
-          padding: 10px 16px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-yellow)) !important;
+          padding: 10px 14px !important;
+          background: linear-gradient(135deg, var(--hb-yellow), var(--hb-orange), var(--hb-red)) !important;
           color: white !important;
           font-weight: 950 !important;
+          box-shadow: 0 12px 30px rgba(18,7,7,.2);
+        }
+
+        .hb-category-tag {
+          position: absolute;
+          right: 18px;
+          top: 18px;
+          z-index: 2;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 14px;
+          border-radius: 999px;
+          background: rgba(18,7,7,.72);
+          color: white;
+          font-size: 12px;
+          font-weight: 950;
+          backdrop-filter: blur(10px);
         }
 
         .hb-content {
-          padding: 30px;
+          padding: 26px;
         }
 
         .hb-content h3 {
-          font-size: 34px;
+          font-size: 30px;
           font-weight: 950;
           margin-bottom: 18px;
+          letter-spacing: -1px;
         }
 
         .hb-list {
           list-style: none;
           padding: 0;
-          margin: 0 0 28px;
+          margin: 0 0 26px;
         }
 
         .hb-list li {
@@ -275,9 +364,9 @@ const Deals = () => {
           align-items: center;
           gap: 12px;
           color: var(--hb-muted);
-          margin-bottom: 14px;
+          margin-bottom: 13px;
           font-size: 15px;
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .hb-list li::before {
@@ -291,7 +380,7 @@ const Deals = () => {
           justify-content: space-between;
           align-items: flex-end;
           gap: 12px;
-          margin-bottom: 26px;
+          margin-bottom: 24px;
         }
 
         .hb-price {
@@ -303,16 +392,18 @@ const Deals = () => {
 
         .hb-new {
           color: var(--hb-red);
-          font-size: 44px;
+          font-size: 40px;
           line-height: 1;
           font-weight: 950;
+          letter-spacing: -1px;
         }
 
         .hb-old {
           color: #9b8b80;
           text-decoration: line-through;
-          margin-bottom: 8px;
+          margin-bottom: 7px;
           font-size: 16px;
+          font-weight: 800;
         }
 
         .hb-save {
@@ -330,17 +421,17 @@ const Deals = () => {
           width: 100%;
           border: none !important;
           border-radius: 999px !important;
-          padding: 16px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          padding: 15px !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-weight: 950 !important;
           font-size: 16px !important;
-          box-shadow: 0 18px 45px rgba(229,9,20,.26);
-          transition: .35s ease;
+          box-shadow: 0 16px 34px rgba(229,9,20,.24);
+          transition: .32s ease;
         }
 
         .hb-claim:hover {
-          transform: translateY(-5px) scale(1.03);
+          transform: translateY(-3px) scale(1.02);
         }
 
         .hb-cart-panel {
@@ -348,10 +439,13 @@ const Deals = () => {
           border-radius: 36px;
           padding: 28px;
           background:
-            linear-gradient(135deg, rgba(255,255,255,.97), rgba(255,227,211,.9));
+            radial-gradient(circle at top right, rgba(255,191,0,.24), transparent 32%),
+            linear-gradient(135deg, rgba(255,255,255,.97), rgba(255,235,210,.94));
           border: 1px solid rgba(229,9,20,.18);
           box-shadow: 0 35px 95px rgba(18,7,7,.13);
-          scroll-margin-top: 100px;
+          scroll-margin-top: 110px;
+          position: relative;
+          z-index: 2;
         }
 
         .hb-cart-head {
@@ -363,7 +457,7 @@ const Deals = () => {
 
         .hb-cart-head h3 {
           margin: 0;
-          font-size: 34px;
+          font-size: 32px;
           font-weight: 950;
         }
 
@@ -373,17 +467,19 @@ const Deals = () => {
           border-radius: 50%;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange));
           color: white;
           font-weight: 950;
+          box-shadow: 0 12px 28px rgba(229,9,20,.26);
         }
 
         .hb-empty-cart {
-          padding: 38px 20px;
+          padding: 36px 20px;
           text-align: center;
           border-radius: 26px;
-          border: 1px dashed rgba(229,9,20,.28);
+          border: 1px dashed rgba(229,9,20,.3);
           color: var(--hb-muted);
+          background: rgba(255,255,255,.55);
         }
 
         .hb-empty-cart i {
@@ -395,13 +491,13 @@ const Deals = () => {
 
         .hb-cart-list {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 18px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
         }
 
         .hb-cart-item {
           display: grid;
-          grid-template-columns: 70px 1fr auto;
+          grid-template-columns: 68px 1fr auto;
           gap: 14px;
           align-items: center;
           padding: 14px;
@@ -411,8 +507,8 @@ const Deals = () => {
         }
 
         .hb-cart-img {
-          width: 70px;
-          height: 70px;
+          width: 68px;
+          height: 68px;
           border-radius: 18px;
           object-fit: cover;
         }
@@ -420,11 +516,13 @@ const Deals = () => {
         .hb-cart-name {
           font-weight: 950;
           margin-bottom: 4px;
+          line-height: 1.2;
         }
 
         .hb-cart-small {
           color: var(--hb-muted);
           font-size: 13px;
+          font-weight: 700;
         }
 
         .hb-cart-controls {
@@ -449,7 +547,7 @@ const Deals = () => {
         .hb-qty {
           min-width: 24px;
           text-align: center;
-          font-weight: 900;
+          font-weight: 950;
         }
 
         .hb-remove {
@@ -481,6 +579,7 @@ const Deals = () => {
           justify-content: space-between;
           color: var(--hb-muted);
           margin-bottom: 12px;
+          font-weight: 750;
         }
 
         .hb-bill-row.total {
@@ -496,9 +595,10 @@ const Deals = () => {
           border: none !important;
           border-radius: 999px !important;
           padding: 15px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-weight: 950 !important;
+          box-shadow: 0 16px 34px rgba(229,9,20,.24);
         }
 
         .hb-clear {
@@ -509,26 +609,41 @@ const Deals = () => {
           border: 1px solid rgba(229,9,20,.2) !important;
           background: white !important;
           color: var(--hb-black) !important;
-          font-weight: 850 !important;
+          font-weight: 900 !important;
         }
 
         .hb-app {
-          margin-top: 95px;
-          padding: 80px 55px;
+          margin-top: 85px;
+          padding: 70px 45px;
           border-radius: 40px;
           text-align: center;
           background:
-            linear-gradient(rgba(143,0,8,.84), rgba(18,7,7,.86)),
+            linear-gradient(rgba(143,0,8,.82), rgba(18,7,7,.88)),
             url("https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1700&q=95") center/cover;
           color: white;
-          box-shadow: 0 35px 100px rgba(18,7,7,.22);
+          box-shadow: 0 35px 100px rgba(18,7,7,.24);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hb-app::after {
+          content: "";
+          position: absolute;
+          width: 190px;
+          height: 190px;
+          border-radius: 50%;
+          background: rgba(255,191,0,.22);
+          right: -60px;
+          top: -60px;
         }
 
         .hb-app h2 {
-          font-size: clamp(42px,6vw,78px);
-          line-height: .92;
+          position: relative;
+          z-index: 2;
+          font-size: clamp(36px, 6vw, 72px);
+          line-height: .96;
           font-weight: 950;
-          margin-bottom: 20px;
+          margin-bottom: 18px;
         }
 
         .hb-app h2 span {
@@ -536,16 +651,21 @@ const Deals = () => {
         }
 
         .hb-app p {
-          color: rgba(255,255,255,.76);
+          position: relative;
+          z-index: 2;
+          color: rgba(255,255,255,.78);
           max-width: 760px;
           margin: auto;
-          line-height: 1.9;
+          line-height: 1.85;
           font-size: 18px;
+          font-weight: 600;
         }
 
         .hb-discount {
+          position: relative;
+          z-index: 2;
           display: inline-flex;
-          margin-top: 30px;
+          margin-top: 28px;
           padding: 14px 24px;
           border-radius: 999px;
           background: rgba(255,191,0,.13);
@@ -555,7 +675,9 @@ const Deals = () => {
         }
 
         .hb-store-buttons {
-          margin-top: 38px;
+          position: relative;
+          z-index: 2;
+          margin-top: 36px;
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
@@ -563,8 +685,8 @@ const Deals = () => {
         }
 
         .hb-store {
-          min-width: 240px;
-          height: 68px;
+          min-width: 230px;
+          height: 66px;
           border-radius: 22px !important;
           border: 1px solid rgba(255,191,0,.28) !important;
           background: rgba(255,255,255,.1) !important;
@@ -574,7 +696,7 @@ const Deals = () => {
           justify-content: center;
           gap: 14px;
           font-weight: 950 !important;
-          transition: .35s ease;
+          transition: .32s ease;
         }
 
         .hb-store:hover {
@@ -611,7 +733,7 @@ const Deals = () => {
           border-radius: 50%;
           display: grid;
           place-items: center;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark));
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange));
           color: white;
           font-size: 44px;
           box-shadow: 0 20px 52px rgba(229,9,20,.34);
@@ -651,7 +773,7 @@ const Deals = () => {
           border: none !important;
           border-radius: 999px !important;
           padding: 14px 24px !important;
-          background: linear-gradient(135deg, var(--hb-red), var(--hb-red-dark)) !important;
+          background: linear-gradient(135deg, var(--hb-red), var(--hb-orange)) !important;
           color: white !important;
           font-weight: 950 !important;
         }
@@ -667,6 +789,10 @@ const Deals = () => {
         }
 
         @media(max-width: 991px) {
+          .hb-deals {
+            padding: 105px 0 70px;
+          }
+
           .hb-cart-list {
             grid-template-columns: 1fr;
           }
@@ -678,20 +804,93 @@ const Deals = () => {
 
         @media(max-width: 768px) {
           .hb-deals {
-            padding: 110px 0 70px;
+            padding: 92px 0 58px;
+          }
+
+          .hb-heading {
+            margin-bottom: 34px;
+          }
+
+          .hb-heading h2 {
+            line-height: 1;
+            letter-spacing: -2px;
+          }
+
+          .hb-heading p {
+            font-size: 15px;
+            line-height: 1.7;
+            padding: 0 6px;
+          }
+
+          .hb-quick-strip {
+            justify-content: flex-start;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 8px;
+            margin: -12px 0 28px;
+          }
+
+          .hb-quick-pill {
+            flex: 0 0 auto;
           }
 
           .hb-img-wrap {
-            height: 230px;
+            height: 215px;
           }
 
           .hb-content {
-            padding: 24px;
+            padding: 22px;
           }
 
-          .hb-app,
+          .hb-content h3 {
+            font-size: 25px;
+          }
+
+          .hb-bottom {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .hb-new {
+            font-size: 34px;
+          }
+
           .hb-cart-panel {
-            padding: 28px 20px;
+            margin-top: 48px;
+            border-radius: 28px;
+            padding: 20px;
+          }
+
+          .hb-cart-head h3 {
+            font-size: 25px;
+          }
+
+          .hb-cart-item {
+            grid-template-columns: 56px 1fr;
+          }
+
+          .hb-cart-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+          }
+
+          .hb-cart-item > div:last-child {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+
+          .hb-cart-price {
+            text-align: left;
+            margin-top: 0;
+          }
+
+          .hb-app {
+            margin-top: 55px;
+            padding: 46px 22px;
+            border-radius: 28px;
           }
 
           .hb-store-buttons {
@@ -700,45 +899,90 @@ const Deals = () => {
 
           .hb-store {
             width: 100%;
+            min-width: auto;
+          }
+
+          .hb-floating-fire {
+            font-size: 130px;
+            right: -42px;
+            top: 70px;
+          }
+
+          .hb-floating-steam {
+            display: none;
+          }
+        }
+
+        @media(max-width: 420px) {
+          .hb-eyebrow {
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            padding: 10px 14px;
           }
 
           .hb-heading h2 {
-            line-height: 1;
+            font-size: 42px;
           }
 
-          .hb-bottom {
-            align-items: flex-start;
-            flex-direction: column;
+          .hb-img-wrap {
+            height: 200px;
+          }
+
+          .hb-category-tag {
+            top: 62px;
+            right: 18px;
           }
         }
       `}</style>
 
       <main className="hb-deals">
         <i className="bi bi-fire hb-floating-fire"></i>
+        <i className="bi bi-cloud-steam-fill hb-floating-steam"></i>
 
         <Container>
           <div className="hb-heading">
-            <div className="hb-eyebrow">Hot Deals • Bigger Cravings</div>
+            <div className="hb-eyebrow">
+              <i className="bi bi-stars"></i>
+              Fast Food • Chinese • Desi Deals
+            </div>
 
             <h2>
-              Today’s <span>Special Deals</span>
+              Today’s <span>Crazy Deals</span>
             </h2>
 
             <p>
-              Freshly crafted combos loaded with bold flavours, crispy bites and
-              unbeatable prices.
+              Combo boxes made for every craving — crispy fast food, saucy
+              Chinese favourites and proper desi feast deals at bold prices.
             </p>
+          </div>
 
-            <div className="hb-line"></div>
+          <div className="hb-quick-strip">
+            <span className="hb-quick-pill">
+              <i className="bi bi-lightning-charge-fill"></i> Hot Combos
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-fire"></i> Spicy Flavours
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-cloud-steam-fill"></i> Fresh Meals
+            </span>
+            <span className="hb-quick-pill">
+              <i className="bi bi-bag-check-fill"></i> Easy Booking
+            </span>
           </div>
 
           <Row className="g-4">
             {deals.map((deal) => (
-              <Col lg={4} md={6} key={deal.id}>
+              <Col lg={3} md={6} key={deal.id}>
                 <div className="hb-deal-card">
                   <div className="hb-img-wrap">
                     <img src={deal.img} alt={deal.title} />
                     <Badge className="hb-badge">{deal.tag}</Badge>
+
+                    <div className="hb-category-tag">
+                      <i className={getCategoryIcon(deal.category)}></i>
+                      {deal.category}
+                    </div>
                   </div>
 
                   <div className="hb-content">
@@ -780,10 +1024,10 @@ const Deals = () => {
 
             {cart.length === 0 ? (
               <div className="hb-empty-cart">
-                <i className="bi bi-bag"></i>
+                <i className="bi bi-bag-heart-fill"></i>
                 <strong>No deals selected yet</strong>
                 <p className="mb-0 mt-2">
-                  Click “Claim This Deal” to add a deal to cart.
+                  Tap “Claim This Deal” and build your combo order.
                 </p>
               </div>
             ) : (
@@ -868,19 +1112,22 @@ const Deals = () => {
           </div>
 
           <div className="hb-app">
-            <div className="hb-eyebrow">Fast Food App</div>
+            <div className="hb-eyebrow">
+              <i className="bi bi-phone-fill"></i>
+              Mobile Ordering
+            </div>
 
             <h2>
-              Download Our <span>Mobile App</span>
+              Order Faster <span>From Your Phone</span>
             </h2>
 
             <p>
-              Unlock exclusive discounts, loyalty rewards, weekly offers and
-              lightning-fast ordering.
+              Save your favourite fast food, Chinese and desi deals. Reorder
+              quickly and unlock exclusive combo offers.
             </p>
 
             <div className="hb-discount">
-              🔥 Get 50% OFF Your First Burger
+              🔥 Get 50% OFF Your First Combo
             </div>
 
             <div className="hb-store-buttons">
@@ -918,8 +1165,8 @@ const Deals = () => {
           <h3>Deal Booked Successfully!</h3>
 
           <p>
-            Thank you for your order. Our team has received your deal booking
-            and will prepare it fresh for you.
+            Thank you for your order. Your deal booking has been received and
+            our team will prepare it fresh for you.
           </p>
 
           <div className="hb-success-total">
